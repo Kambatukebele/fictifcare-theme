@@ -1,0 +1,84 @@
+{% doc %}
+  @description render mobile navigation
+
+  @example {% render 'navigation-mobile' %}
+{% enddoc %}
+
+<div
+  id="navigation-mobile"
+  class="absolute top-0 bg-white z-10 left-0 transition-all -translate-x-96 opacity-0 w-full px-5 flex flex-col justify-between duration-700 ease-in-out xl:hidden"
+>
+  <!-- close button -->
+  <div id="close-menu" class="h-[72px] flex flex-col justify-center items-end ">
+    <span class="block">
+      {% render 'icon-close', stroke: '', size: '' %}
+    </span>
+    <span class="w-full h-5 flex justify-center items-center">
+      <hr class="block border border-[#898989] w-full">
+    </span>
+  </div>
+  <!-- navigation -->
+  <ul class="w-full flex flex-col justify-start gap-6 h-[calc(100vh-360px)] overflow-y-auto">
+    <!-- card nav -->
+    <div class="w-full">
+      <div class="w-full flex justify-between items-center">
+        <li class="text-2xl font-semibold">
+          <a> Home </a>
+        </li>
+        <span>
+          {% render 'icon-chevron-right', stroke: '', size: '20' %}
+        </span>
+      </div>
+      <!-- submenu firt level -->
+      <div class="indent-5">
+        <!-- card submenu level first -->
+        <div class="w-full flex justify-between items-center">
+          <li class="text-2xl font-semibold">
+            <a> Home </a>
+          </li>
+          <span>
+            {% render 'icon-chevron-right', stroke: '', size: '20' %}
+          </span>
+        </div>
+        <div class="indent-5">
+          <a class="block">Item 1</a>
+        </div>
+      </div>
+    </div>
+  </ul>
+  <!-- account description -->
+  <div class="flex flex-col gap-12 h-72">
+    <div class="flex flex-col gap-6">
+      <p class="text-base text-[#545454] w-72">
+        Become a Fictifcare member for the best products, ispiration and storeies in skincare.
+        <a href=""><strong>Learn more</strong></a>
+      </p>
+      <div class="flex justify-start items-center gap-5">
+        <a class="bg-black w-fit flex justify-center items-center text-white h-12 px-8 uppercase">Join us</a>
+        <a class="bg-white w-fit flex justify-center items-center text-black h-12 px-8 border border-[#545454] uppercase"
+          >Sign in</a
+        >
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-start gap-6">
+      <div class="flex justify-start items-center gap-2">
+        <span>
+          {% render 'icon-information', stroke: '', size: '' %}
+        </span>
+        <span> Help </span>
+      </div>
+      <div class="flex justify-start items-center gap-2">
+        <span>
+          {% render 'icon-bag', stroke: '', size: '' %}
+        </span>
+        <span> Bag </span>
+      </div>
+      <div class="flex justify-start items-center gap-2">
+        <span>
+          {% render 'icon-map', stroke: '', size: '' %}
+        </span>
+        <span> Find a store </span>
+      </div>
+    </div>
+  </div>
+</div>
