@@ -13,8 +13,34 @@
   "sections": {
     "announcement_bar_36VkgR": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_mikzYM": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "View our new collection",
+            "announcement_url": ""
+          }
+        },
+        "announcement_FEJTLj": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "Free Shipping up to 50$",
+            "announcement_url": "shopify://collections"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_mikzYM",
+        "announcement_FEJTLj"
+      ],
       "name": "Announcement bar",
-      "settings": {}
+      "settings": {
+        "announcement_bg": "#000000",
+        "announcement_text_color": "#ffffff",
+        "announcement_height": "h-10",
+        "announcement_text_decoration": "uppercase",
+        "announcement_animation": 5
+      }
     }
   },
   "order": [
