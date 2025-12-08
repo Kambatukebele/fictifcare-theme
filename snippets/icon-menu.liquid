@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon menu
+
+  @example {% render 'icon-menu', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{%- if stroke != blank -%}{{- stroke -}}{%- else -%}#000{%- endif -%}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <path d="M7.68 32h48.64M7.68 15.97h48.64M7.68 48.03h48.64"></path>
+</svg>
