@@ -1,0 +1,87 @@
+<header class="w-full">
+  <div class="container mx-auto px-4 h-12 border flex justify-center items-center">
+    <div class="w-full flex justify-between items-center">
+      <!-- hamburger menu -->
+      <div id="hamburger-menu" class="w-1/3 md:hidden cursor-pointer">
+        {% render 'icon-menu', stroke: '#000', size: '28' %}
+      </div>
+      <!-- navigation -->
+      <div class="w-1/3 hidden md:block">
+        <ul class="flex justify-start items-center gap-2">
+          <li>
+            <a>Home</a>
+          </li>
+          <li>
+            <a>Home</a>
+          </li>
+          <li>
+            <a>Home</a>
+          </li>
+          <li>
+            <a>Home</a>
+          </li>
+        </ul>
+      </div>
+      <!-- navigation mobile -->
+      {% render 'navigation-mobile' %}
+      <!-- Logo -->
+      <div class="w-1/3 flex justify-center">
+        <a class="block">
+          {{ shop.name | upcase }}
+        </a>
+      </div>
+      <!-- Icons -->
+      <div class="w-1/3">
+        <div class="flex justify-end items-center gap-3 ">
+          <span class="block cursor-pointer">
+            {% render 'icon-search', stroke: '', size: '' %}
+          </span>
+          <span class="hidden cursor-pointer lg:block">
+            {% render 'icon-user', stroke: '', size: '' %}
+          </span>
+          <span class="hidden cursor-pointer lg:block">
+            {% render 'icon-heart', stroke: '', size: '' %}
+          </span>
+          <span class="cursor-pointer">
+            {% render 'icon-cart', stroke: '', size: '' %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.querySelector('#hamburger-menu');
+  const closeMenu = document.querySelector('#close-menu');
+  const navigationMobile = document.querySelector('#navigation-mobile');
+
+  hamburger.addEventListener('click', () => {
+    navigationMobile.classList.replace('-translate-x-96', 'translate-x-0');
+    navigationMobile.classList.replace('opacity-0', 'opacity-100');
+  });
+  closeMenu.addEventListener('click', () => {
+    navigationMobile.classList.replace('translate-x-0', '-translate-x-96');
+    navigationMobile.classList.replace('opacity-100', 'opacity-0');
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header",
+  "limit": 1,
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [],
+  "presets": [
+    {
+      "name": "Header",
+      "settings": {},
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
