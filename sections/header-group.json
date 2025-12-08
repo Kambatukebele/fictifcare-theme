@@ -41,9 +41,15 @@
         "announcement_text_decoration": "uppercase",
         "announcement_animation": 5
       }
+    },
+    "header_dxFyW4": {
+      "type": "header",
+      "name": "Header",
+      "settings": {}
     }
   },
   "order": [
-    "announcement_bar_36VkgR"
+    "announcement_bar_36VkgR",
+    "header_dxFyW4"
   ]
 }
