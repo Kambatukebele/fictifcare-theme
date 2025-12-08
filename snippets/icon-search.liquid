@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon search
+
+  @example {% render 'icon-search', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{%- if stroke != blank -%}{{- stroke -}}{%- else -%}#000{%- endif -%}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <circle cx="27.31" cy="25.74" r="18.1"></circle><path d="M39.58 39.04L56.14 57"></path>
+</svg>
