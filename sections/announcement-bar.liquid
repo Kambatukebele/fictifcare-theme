@@ -1,0 +1,96 @@
+<section
+  style="background-color: {{ section.settings.announcement_bg }}; color: {{ section.settings.announcement_text_color }}"
+  class="w-full"
+  animation-speed="{{ section.settings.announcement_animation | times: 1000  }}"
+>
+  <div class="container mx-auto h-11 flex justify-center items-center relative">
+    <p class="text-base announcement absolute inset-0 flex items-center justify-center transform transition-all duration-700 ease-in-out opacity-100 translate-y-0 z-10">
+      Welcome one
+    </p>
+    <p class="text-base announcement absolute inset-0 flex items-center justify-center transform transition-all duration-700 ease-in-out opacity-0 translate-y-4 z-0 pointer-events-none">
+      Welcome two
+    </p>
+    <p class="text-base announcement absolute inset-0 flex items-center justify-center transform transition-all duration-700 ease-in-out opacity-0 translate-y-4 z-0 pointer-events-none">
+      Welcome three
+    </p>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll('.announcement');
+  let current = 0;
+  const elem = document.querySelector('section[animation-speed]');
+  let speed = elem.getAttribute('animation-speed');
+  console.log(speed);
+
+  function showIndex(i) {
+    items.forEach((el, idx) => {
+      if (idx === i) {
+        el.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none', 'z-0');
+        el.classList.add('opacity-100', 'translate-y-0', 'z-10');
+      } else {
+        el.classList.remove('opacity-100', 'translate-y-0', 'z-10');
+        el.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none', 'z-0');
+      }
+    });
+  }
+
+  showIndex(current);
+
+  setInterval(() => {
+    current = (current + 1) % items.length;
+    showIndex(current);
+  }, speed);
+</script>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "announcement_bar",
+  "disabled_on": {
+    "groups": ["footer"],
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Announcement colors"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bg",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "announcement_text_color",
+      "label": "Text color",
+      "default": "#000"
+    },
+    {
+      "type": "header",
+      "content": "Animation settings"
+    },
+    {
+      "type": "range",
+      "id": "announcement_animation",
+      "min": 3,
+      "max": 10,
+      "label": "Animation speed",
+      "step": 1,
+      "unit": "s",
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "settings": {
+        "announcement_bg": "#ffffff",
+        "announcement_text_color": "#000"
+      }
+    }
+  ]
+}
+{% endschema %}

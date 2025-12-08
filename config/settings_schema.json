@@ -1,0 +1,35 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Fictifcare",
+    "theme_version": "0.1.0",
+    "theme_author": "Kamba",
+    "theme_documentation_url": "https://kambatukebele.com/",
+    "theme_support_url": "https://kambatukebele.com/"
+  },
+  {
+    "name": "t:general.typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_headings_font",
+        "default": "work_sans_n4",
+        "label": "Headings"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body fonts",
+        "default": "work_sans_n4"
+      }
+    ]
+  }
+]
