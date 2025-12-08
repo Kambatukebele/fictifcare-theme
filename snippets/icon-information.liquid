@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon information
+
+  @example {% render 'icon-information', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{%- if stroke != blank -%}{{- stroke -}}{%- else -%}#000{%- endif -%}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <path d="M23.71 18.56A9.37 9.37 0 1133.4 33a2.36 2.36 0 00-1.92 2.29v3.91" stroke-linecap="round"></path><circle cx="31.85" cy="47.15" r="2.4" stroke-linecap="round"></circle><circle cx="32" cy="32" r="25.55" stroke-linecap="round"></circle>
+</svg>
