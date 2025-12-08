@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon bag
+
+  @example {% render 'icon-bag', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{%- if stroke != blank -%}{{- stroke -}}{%- else -%}#000{%- endif -%}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <path d="M49.19 57.34H14.81L16 35.91A15.46 15.46 0 0131.44 21.3h1.83A14.71 14.71 0 0148 35.2z"></path><path d="M27.38 21.84L19.72 7.39a.5.5 0 01.52-.73l4.65.77a46 46 0 0014.76.05l5.11-.81a.5.5 0 01.51.75l-8.42 14.11"></path><path stroke-linecap="round" d="M28.23 13.15l2.5 8.15M35.14 14.79l-1.35 6.52"></path><path d="M38.14 34.05a5.8 5.8 0 00-5.45-3.51c-4.9 0-5.09 3.51-5.09 3.51s-.73 4.33 5.27 4.79c6.25.48 5.27 4.79 5.27 4.79s-.64 3.75-5.27 4S26.8 43 26.8 43M32.69 27.43v23.78"></path>
+</svg>
