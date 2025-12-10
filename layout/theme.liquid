@@ -3,6 +3,8 @@
   <head>
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
+    <script src="{{ 'header.js' | asset_url }}" defer></script>
+    <script src="{{ 'mobile_navigation.js' | asset_url }}" defer></script>
 
     {% comment %}
       Font preloading:
