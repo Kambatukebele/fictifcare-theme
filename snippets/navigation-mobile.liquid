@@ -1,50 +1,82 @@
 {% doc %}
   @description render mobile navigation
 
+  @param main_menu - {string} the input schema settings
+
   @example {% render 'navigation-mobile' %}
 {% enddoc %}
 
 <div
   id="navigation-mobile"
-  class="absolute top-0 bg-white z-10 left-0 transition-all -translate-x-96 opacity-0 w-full px-5 flex flex-col justify-between duration-700 ease-in-out xl:hidden"
+  class="fixed top-0 bg-white shadow z-10 -left-[1200px] transition-all -translate-x-96 opacity-0 w-3/4 px-5 flex flex-col justify-between duration-700 ease-in-out xl:hidden"
 >
   <!-- close button -->
   <div id="close-menu" class="h-[72px] flex flex-col justify-center items-end ">
-    <span class="block">
+    <span class="block cursor-pointer">
       {% render 'icon-close', stroke: '', size: '' %}
     </span>
     <span class="w-full h-5 flex justify-center items-center">
-      <hr class="block border border-[#898989] w-full">
+      <hr class="block border border-[#89898961] w-full">
     </span>
   </div>
   <!-- navigation -->
-  <ul class="w-full flex flex-col justify-start gap-6 h-[calc(100vh-360px)] overflow-y-auto">
-    <!-- card nav -->
-    <div class="w-full">
-      <div class="w-full flex justify-between items-center">
-        <li class="text-2xl font-semibold">
-          <a> Home </a>
-        </li>
-        <span>
-          {% render 'icon-chevron-right', stroke: '', size: '20' %}
-        </span>
-      </div>
-      <!-- submenu firt level -->
-      <div class="indent-5">
-        <!-- card submenu level first -->
-        <div class="w-full flex justify-between items-center">
-          <li class="text-2xl font-semibold">
-            <a> Home </a>
-          </li>
-          <span>
-            {% render 'icon-chevron-right', stroke: '', size: '20' %}
-          </span>
+  <ul class="w-full flex flex-col justify-start gap-4 h-[calc(100vh-360px)] overflow-y-auto">
+    {%- if main_menu.links != blank -%}
+      {%- for mobile_nav in main_menu.links -%}
+        <!-- card nav -->
+        <div class="w-full mobile_nav">
+          <div class="w-full flex justify-between items-center">
+            <li class="text-base font-normal">
+              {%- unless mobile_nav.levels != 0 -%}
+                <a href="{{- mobile_nav.url -}}" class="">
+              {% endunless %}
+              {{ mobile_nav.title }}
+              {%- unless mobile_nav.levels != 0 -%}</a>{% endunless %}
+            </li>
+            {%- if mobile_nav.levels != 0 -%}
+              <span class="rotate-90 mobile_nav_icon">
+                {% render 'icon-chevron-right', stroke: '', size: '16' %}
+              </span>
+            {% endif %}
+          </div>
+          <!-- submenu firt level -->
+          {%- if mobile_nav.levels != 0 -%}
+            <div class="indent-5 hidden mobile_subMenu">
+              {% for mobile_subMenu in mobile_nav.links %}
+                <!-- card submenu level first -->
+                <div class="mobile_subMenu_level_three">
+                  <div class="w-full flex justify-between items-center">
+                    <li class="text-base font-normal py-2">
+                      {% unless mobile_subMenu.levels != 0 %}
+                        <a href="{{ mobile_subMenu.url }}">
+                      {% endunless %}
+                      {{ mobile_subMenu.title }}
+                      {% unless mobile_subMenu.levels != 0 %}
+                        </a>
+                      {% endunless %}
+                    </li>
+                    {%- if mobile_subMenu.levels != 0 -%}
+                      <span class="mobile_subMenu_level_three_icon rotate-90">
+                        {% render 'icon-chevron-right', stroke: '', size: '16' %}
+                      </span>
+                    {%- endif -%}
+                  </div>
+                  {%- if mobile_subMenu.levels != 0 -%}
+                    <div class="indent-5 hidden mobile_subMenu_level_three_list">
+                      {%- for mobile_subMenu_thirdLevel in mobile_subMenu.links -%}
+                        <a href="{{ mobile_subMenu_thirdLevel.url }}" class="block py-2">
+                          {{ mobile_subMenu_thirdLevel.title }}
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {% endfor %}
+            </div>
+          {%- endif -%}
         </div>
-        <div class="indent-5">
-          <a class="block">Item 1</a>
-        </div>
-      </div>
-    </div>
+      {%- endfor -%}
+    {%- endif -%}
   </ul>
   <!-- account description -->
   <div class="flex flex-col gap-12 h-72">
