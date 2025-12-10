@@ -1,0 +1,24 @@
+<!-- Mega menu -->
+<section class="w-full bg-amber-400">
+  <div class="container mx-auto">
+    <div class="w-full flex justify-between items-start py-12 border">
+      {%- for item in (1..4) -%}
+        <!-- Mega Menu card -->
+        <div>
+          <div class="py-2">
+            <h4 class="text-xl font-semibold">Help & Support</h4>
+          </div>
+          <div class="w-full flex flex-col">
+            {%- for item in (1..7) -%}
+              <a href="" class="text-base text-[#545454] font-normal py-2">Help & FAQ's</a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+      <!-- Mega menu Image card -->
+      <div class="w-96 h-96 border">
+        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+      </div>
+    </div>
+  </div>
+</section>
