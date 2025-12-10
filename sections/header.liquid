@@ -1,29 +1,63 @@
 <header class="w-full">
-  <div class="container mx-auto px-4 h-12 border flex justify-center items-center">
+  <div class="container mx-auto px-4 h-16 flex justify-center items-center xl:px-0">
     <div class="w-full flex justify-between items-center">
       <!-- hamburger menu -->
-      <div id="hamburger-menu" class="w-1/3 md:hidden cursor-pointer">
+      <div id="hamburger-menu" class="w-1/3 xl:hidden cursor-pointer">
         {% render 'icon-menu', stroke: '#000', size: '28' %}
       </div>
-      <!-- navigation -->
-      <div class="w-1/3 hidden md:block">
-        <ul class="flex justify-start items-center gap-2">
-          <li>
-            <a>Home</a>
-          </li>
-          <li>
-            <a>Home</a>
-          </li>
-          <li>
-            <a>Home</a>
-          </li>
-          <li>
-            <a>Home</a>
-          </li>
+      <!-- navigation normal desktop -->
+      <div class="w-1/3 hidden xl:block">
+        <ul class="flex justify-start items-center gap-5 h-full">
+          {%- if section.settings.header_menu.links -%}
+            {%- for nav in section.settings.header_menu.links -%}
+              <div class="flex flex-col relative h-full">
+                <!-- Displaying nav -->
+                <li class="text-base nav cursor-pointer uppercase w-fit h-12 px-4 flex justify-center items-center ">
+                  {%- unless nav.levels != 0 -%}
+                    <a href="{{- nav.url -}}" class="">
+                  {% endunless %}
+                  {{- nav.title -}}
+                  {%- unless nav.levels != 0 -%}</a>{% endunless %}
+                </li>
+                <!-- sub menu header  desktop displayed on click -->
+                {%- if nav.levels != 0 -%}
+                  <div class="bg-white hidden nav-blocks border border-gray-200 w-52 h-fit px-4 py-5 shadow rounded absolute top-14 z-10">
+                    <ul class="flex flex-col gap-2">
+                      {%- for subMenu in nav.links -%}
+                        <div>
+                          <li class="w-full flex justify-between subMenus cursor-pointer py-2 border-b border-gray-100 {% if forloop.last %} border-none {% endif %}">
+                            <a class="block text-base text-[#545454]">{{ subMenu.title }}</a>
+                            {%- if subMenu.levels != 0 -%}
+                              <span class="block rotate-90 icon-subMenu-link">
+                                {%- render 'icon-chevron-right', stroke: '', size: '18' -%}
+                              </span>
+                            {%- endif -%}
+                          </li>
+
+                          {%- if subMenu.levels != 0 -%}
+                            <div class="subMenuThree hidden">
+                              {% for subMenuThree in subMenu.links %}
+                                <a
+                                  href="{{ subMenuThree.url }}"
+                                  class="text-[#545454] text-base cursor-pointer block border-b border-b-gray-100 {% if forloop.last %} border-none {% endif %} py-2"
+                                >
+                                  {{- subMenuThree.title -}}
+                                </a>
+                              {% endfor %}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
         </ul>
       </div>
       <!-- navigation mobile -->
-      {% render 'navigation-mobile' %}
+      {% render 'navigation-mobile', main_menu: section.settings.header_menu %}
       <!-- Logo -->
       <div class="w-1/3 flex justify-center">
         <a class="block">
@@ -51,21 +85,6 @@
   </div>
 </header>
 
-<script>
-  const hamburger = document.querySelector('#hamburger-menu');
-  const closeMenu = document.querySelector('#close-menu');
-  const navigationMobile = document.querySelector('#navigation-mobile');
-
-  hamburger.addEventListener('click', () => {
-    navigationMobile.classList.replace('-translate-x-96', 'translate-x-0');
-    navigationMobile.classList.replace('opacity-0', 'opacity-100');
-  });
-  closeMenu.addEventListener('click', () => {
-    navigationMobile.classList.replace('translate-x-0', '-translate-x-96');
-    navigationMobile.classList.replace('opacity-100', 'opacity-0');
-  });
-</script>
-
 {% schema %}
 {
   "name": "Header",
@@ -75,7 +94,54 @@
   "disabled_on": {
     "groups": ["footer"]
   },
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_logo",
+      "label": "Logo",
+      "info": "Logo site"
+    },
+    {
+      "type": "header",
+      "content": "Header Background"
+    },
+    {
+      "type": "select",
+      "id": "header_background",
+      "label": "Background height",
+      "options": [
+        {
+          "label": "48px",
+          "value": "h-12"
+        },
+        {
+          "label": "56px",
+          "value": "h-14"
+        },
+        {
+          "label": "64px",
+          "value": "h-16"
+        }
+      ],
+      "default": "h-12",
+      "info": "Header height"
+    },
+    {
+      "type": "header",
+      "content": "Header menu"
+    },
+    {
+      "type": "link_list",
+      "id": "header_menu",
+      "label": "Select menu",
+      "default": "main-menu",
+      "info": "Your header menu"
+    }
+  ],
   "presets": [
     {
       "name": "Header",
