@@ -12,44 +12,57 @@
             {%- for nav in section.settings.header_menu.links -%}
               <div class="flex flex-col relative h-full">
                 <!-- Displaying nav -->
-                <li class="text-base nav cursor-pointer uppercase w-fit h-12 px-4 flex justify-center items-center ">
+                <li
+                  class="text-base nav cursor-pointer uppercase w-fit h-12 px-4 flex justify-center items-center"
+                  has-mega-menu="{{ section.settings.header_isMegaMenuActivated }}"
+                >
                   {%- unless nav.levels != 0 -%}
                     <a href="{{- nav.url -}}" class="">
                   {% endunless %}
                   {{- nav.title -}}
                   {%- unless nav.levels != 0 -%}</a>{% endunless %}
                 </li>
-                <!-- sub menu header  desktop displayed on click -->
-                {%- if nav.levels != 0 -%}
-                  <div class="bg-white hidden nav-blocks border border-gray-200 w-52 h-fit px-4 py-5 shadow rounded absolute top-14 z-10">
-                    <ul class="flex flex-col gap-2">
-                      {%- for subMenu in nav.links -%}
-                        <div>
-                          <li class="w-full flex justify-between subMenus cursor-pointer py-2 border-b border-gray-100 {% if forloop.last %} border-none {% endif %}">
-                            <a class="block text-base text-[#545454]">{{ subMenu.title }}</a>
-                            {%- if subMenu.levels != 0 -%}
-                              <span class="block rotate-90 icon-subMenu-link">
-                                {%- render 'icon-chevron-right', stroke: '', size: '18' -%}
-                              </span>
-                            {%- endif -%}
-                          </li>
+                {%- if section.settings.header_isMegaMenuActivated == true -%}
+                  <!-- Mega menu -->
+                  {%- if nav.levels > 0 -%}
+                    {% render 'megamenu',
+                      navigation: nav,
+                      isMegaMenuActivate: section.settings.header_isMegaMenuActivated
+                    %}
+                  {%- endif -%}
+                {%- else -%}
+                  <!-- sub menu header  desktop displayed on click -->
+                  {%- if nav.levels != 0 -%}
+                    <div class="bg-white hidden nav-blocks border border-gray-200 w-52 h-fit px-4 py-5 shadow rounded absolute top-14 z-10">
+                      <ul class="flex flex-col gap-2">
+                        {%- for subMenu in nav.links -%}
+                          <div>
+                            <li class="w-full flex justify-between subMenus cursor-pointer py-2 border-b border-gray-100 {% if forloop.last %} border-none {% endif %}">
+                              <a class="block text-base text-[#545454]">{{ subMenu.title }}</a>
+                              {%- if subMenu.levels != 0 -%}
+                                <span class="block rotate-90 icon-subMenu-link">
+                                  {%- render 'icon-chevron-right', stroke: '', size: '18' -%}
+                                </span>
+                              {%- endif -%}
+                            </li>
 
-                          {%- if subMenu.levels != 0 -%}
-                            <div class="subMenuThree hidden">
-                              {% for subMenuThree in subMenu.links %}
-                                <a
-                                  href="{{ subMenuThree.url }}"
-                                  class="text-[#545454] text-base cursor-pointer block border-b border-b-gray-100 {% if forloop.last %} border-none {% endif %} py-2"
-                                >
-                                  {{- subMenuThree.title -}}
-                                </a>
-                              {% endfor %}
-                            </div>
-                          {%- endif -%}
-                        </div>
-                      {%- endfor -%}
-                    </ul>
-                  </div>
+                            {%- if subMenu.levels != 0 -%}
+                              <div class="subMenuThree hidden">
+                                {% for subMenuThree in subMenu.links %}
+                                  <a
+                                    href="{{ subMenuThree.url }}"
+                                    class="text-[#545454] text-base cursor-pointer block border-b border-b-gray-100 {% if forloop.last %} border-none {% endif %} py-2"
+                                  >
+                                    {{- subMenuThree.title -}}
+                                  </a>
+                                {% endfor %}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
             {%- endfor -%}
@@ -140,6 +153,17 @@
       "label": "Select menu",
       "default": "main-menu",
       "info": "Your header menu"
+    },
+    {
+      "type": "header",
+      "content": "Activate mega menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_isMegaMenuActivated",
+      "label": "Enable mega menu",
+      "default": false,
+      "info": "By toggling this, you will activate the mega menu"
     }
   ],
   "presets": [
