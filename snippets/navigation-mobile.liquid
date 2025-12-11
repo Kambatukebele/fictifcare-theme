@@ -2,18 +2,34 @@
   @description render mobile navigation
 
   @param main_menu - {string} the input schema settings
+  @param background - {string} background color
+  @param color - {string} color text
+  @param description - {string }
+  @param btn1_text - {string }
+  @param btn1_bg - {string }
+  @param btn1_text_transform - {string }
+  @param btn1_text_color - {string }
+  @param btn1_url - {string }
+  @param btn1_enable_border - {string }
+  @param btn2_text - {string }
+  @param btn2_bg - {string }
+  @param btn2_text_transform - {string }
+  @param btn2_text_color - {string }
+  @param btn2_url - {string }
+  @param btn2_enable_border - {string }
 
-  @example {% render 'navigation-mobile' %}
+  @example {% render 'navigation-mobile', background:"", color:"" %}
 {% enddoc %}
 
 <div
+  style="background-color:{{ background }};color:{{ color }}"
   id="navigation-mobile"
-  class="fixed top-0 bg-white shadow z-10 -left-[1200px] transition-all -translate-x-96 opacity-0 w-3/4 px-5 flex flex-col justify-between duration-700 ease-in-out xl:hidden"
+  class="fixed top-0 shadow z-10 -left-[1200px] transition-all -translate-x-96 opacity-0 w-3/4 px-5 flex flex-col justify-between duration-700 ease-in-out xl:hidden"
 >
   <!-- close button -->
   <div id="close-menu" class="h-[72px] flex flex-col justify-center items-end ">
     <span class="block cursor-pointer">
-      {% render 'icon-close', stroke: '', size: '' %}
+      {% render 'icon-close', stroke: color, size: '18' %}
     </span>
     <span class="w-full h-5 flex justify-center items-center">
       <hr class="block border border-[#89898961] w-full">
@@ -35,7 +51,7 @@
             </li>
             {%- if mobile_nav.levels != 0 -%}
               <span class="rotate-90 mobile_nav_icon">
-                {% render 'icon-chevron-right', stroke: '', size: '16' %}
+                {% render 'icon-chevron-right', stroke: color, size: '16' %}
               </span>
             {% endif %}
           </div>
@@ -57,7 +73,7 @@
                     </li>
                     {%- if mobile_subMenu.levels != 0 -%}
                       <span class="mobile_subMenu_level_three_icon rotate-90">
-                        {% render 'icon-chevron-right', stroke: '', size: '16' %}
+                        {% render 'icon-chevron-right', stroke: color, size: '16' %}
                       </span>
                     {%- endif -%}
                   </div>
@@ -81,33 +97,44 @@
   <!-- account description -->
   <div class="flex flex-col gap-12 h-72">
     <div class="flex flex-col gap-6">
-      <p class="text-base text-[#545454] w-72">
-        Become a Fictifcare member for the best products, ispiration and storeies in skincare.
-        <a href=""><strong>Learn more</strong></a>
-      </p>
+      <div class="text-base text-[#545454] w-72">
+        {{ description }}
+      </div>
       <div class="flex justify-start items-center gap-5">
-        <a class="bg-black w-fit flex justify-center items-center text-white h-12 px-8 uppercase">Join us</a>
-        <a class="bg-white w-fit flex justify-center items-center text-black h-12 px-8 border border-[#545454] uppercase"
-          >Sign in</a
-        >
+        {% render 'button',
+          bg: btn1_bg,
+          text_color: btn1_text_color,
+          class: btn1_text_transform,
+          text: btn1_text,
+          url: btn1_url,
+          is_border: btn1_enable_border
+        %}
+        {% render 'button',
+          bg: btn2_bg,
+          text_color: btn2_text_color,
+          class: btn2_text_transform,
+          text: btn2_text,
+          url: btn2_url,
+          is_border: btn2_enable_border
+        %}
       </div>
     </div>
     <div class="flex flex-col justify-center items-start gap-6">
       <div class="flex justify-start items-center gap-2">
         <span>
-          {% render 'icon-information', stroke: '', size: '' %}
+          {% render 'icon-information', stroke: color, size: '' %}
         </span>
         <span> Help </span>
       </div>
       <div class="flex justify-start items-center gap-2">
         <span>
-          {% render 'icon-bag', stroke: '', size: '' %}
+          {% render 'icon-bag', stroke: color, size: '' %}
         </span>
         <span> Bag </span>
       </div>
       <div class="flex justify-start items-center gap-2">
         <span>
-          {% render 'icon-map', stroke: '', size: '' %}
+          {% render 'icon-map', stroke: color, size: '' %}
         </span>
         <span> Find a store </span>
       </div>
