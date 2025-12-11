@@ -1,0 +1,16 @@
+{% doc %}
+  @param logo_image - {string} the logo image
+  @param logo_width - {string} the logo size
+
+  @description This is the logo of the site
+
+  @example {% render 'logo', url:"", logo_image: "", logo_width:"" %}
+{% enddoc %}
+
+<a href="{{ shop.url }}" class="block">
+  {%- if logo_image != blank -%}
+    {{ logo_image | image_url: width: logo_width, height: logo_width | image_tag }}
+  {%- else -%}
+    {{ shop.name | upcase }}
+  {%- endif -%}
+</a>
