@@ -12,11 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nav.addEventListener("click", (e) => {
         e.preventDefault();
         let isMegaMenu = nav.getAttribute("has-mega-menu");
-        console.log(isMegaMenu);
-
-        if (isMegaMenu === true) {
-          console.log("true");
-
+        if (isMegaMenu === "true") {
           //Implement mega menu interraction
           if (megaMenus[index].classList.contains("xl:hidden")) {
             megaMenus.forEach((megamenu) =>
@@ -27,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             megaMenus[index].classList.replace("xl:block", "xl:hidden");
           }
         }
-        if (isMegaMenu === false) {
-          console.log("false");
+        if (isMegaMenu === "false") {
           // open and close the navBlocks
           if (navBlocks[index].classList.contains("hidden")) {
             // 1. Close all
