@@ -29,7 +29,10 @@
           }
         }
       },
-      "block_order": ["announcement_mikzYM", "announcement_FEJTLj"],
+      "block_order": [
+        "announcement_mikzYM",
+        "announcement_FEJTLj"
+      ],
       "name": "Announcement bar",
       "settings": {
         "announcement_bg": "#000000",
@@ -41,6 +44,17 @@
     },
     "header_dxFyW4": {
       "type": "header",
+      "blocks": {
+        "megamenu_image_rYbEWh": {
+          "type": "megamenu_image",
+          "settings": {
+            "megamenu_image": "shopify://shop_images/boots.webp"
+          }
+        }
+      },
+      "block_order": [
+        "megamenu_image_rYbEWh"
+      ],
       "name": "Header",
       "settings": {
         "logo_width": 250,
@@ -68,5 +82,8 @@
       }
     }
   },
-  "order": ["announcement_bar_36VkgR", "header_dxFyW4"]
+  "order": [
+    "announcement_bar_36VkgR",
+    "header_dxFyW4"
+  ]
 }
