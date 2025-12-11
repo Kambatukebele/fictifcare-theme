@@ -1,0 +1,20 @@
+{% doc %}
+  @param class - {string} extra class
+  @param text - {string} button text,
+  @param url - {string}
+  @param bg - {string}
+  @param text_color - {string}
+  @param is_border - {true}
+
+  @description button
+
+  @example {% render 'button', class:"", text:"", url: "" %}
+{% enddoc %}
+
+<a
+  style="background-color:{{ bg }}; color:{{ text_color }}"
+  href="{{ url }}"
+  class="w-fit flex justify-center items-center h-12 px-8 {{ class }} {% if is_border %} border border-[#545454] {% endif %}"
+>
+  {{- text -}}
+</a>
