@@ -29,10 +29,7 @@
           }
         }
       },
-      "block_order": [
-        "announcement_mikzYM",
-        "announcement_FEJTLj"
-      ],
+      "block_order": ["announcement_mikzYM", "announcement_FEJTLj"],
       "name": "Announcement bar",
       "settings": {
         "announcement_bg": "#000000",
@@ -71,8 +68,5 @@
       }
     }
   },
-  "order": [
-    "announcement_bar_36VkgR",
-    "header_dxFyW4"
-  ]
+  "order": ["announcement_bar_36VkgR", "header_dxFyW4"]
 }
