@@ -3,12 +3,12 @@
   @param isMegaMenuActivate - {boolean} check if mega menu is toggle
   @param background - {string} background color
   @param color - {string} color text
+  @param megamenu_image - {block settings}
 
   @description this will render the mega menu
 
   @example {% render 'megamenu', navigation:navigation, isMegaMenuActivate=false, background:"", color:"" %}
 {% enddoc %}
-
 <!-- Mega menu -->
 <section
   style="background-color:{{ background }};color:{{ color }}"
@@ -34,6 +34,17 @@
             </div>
           </div>
         {%- endfor -%}
+        {% for image in megamenu_image %}
+          <!-- Mega menu Image card -->
+          <div class="w-96 h-96">
+            {{
+              image.settings.megamenu_image
+              | image_url: width: 300, height: 300
+              | image_tag: class: 'w-full h-full object-center object-cover'
+            }}
+          </div>
+        {% endfor %}
+
       {%- else -%}
         {%- for item in (1..4) -%}
           <!-- Mega Menu card -->
@@ -48,12 +59,11 @@
             </div>
           </div>
         {%- endfor -%}
+        <!-- Mega menu Image card -->
+        <div class="w-96 h-96 border">
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+        </div>
       {%- endif -%}
-
-      <!-- Mega menu Image card -->
-      <div class="w-96 h-96 border">
-        {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
-      </div>
     </div>
   </div>
 </section>

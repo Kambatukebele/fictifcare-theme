@@ -32,7 +32,8 @@
                       navigation: nav,
                       isMegaMenuActivate: section.settings.header_isMegaMenuActivated,
                       background: section.settings.header_sub_mega_mobile_menu_bg,
-                      color: section.settings.header_sub_mega_mobile_menu_text_color
+                      color: section.settings.header_sub_mega_mobile_menu_text_color,
+                      megamenu_image: section.blocks
                     %}
                   {%- endif -%}
                 {%- else -%}
@@ -347,6 +348,23 @@
       "id": "header_mobile_btn_2_enable",
       "label": "Enable border?",
       "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Megamenu image",
+      "type": "megamenu_image",
+      "settings": [
+        {
+          "type": "header",
+          "content": "This image will be appearing only to the mega menu"
+        },
+        {
+          "type": "image_picker",
+          "id": "megamenu_image",
+          "label": "Mega menu image"
+        }
+      ]
     }
   ],
   "presets": [
