@@ -1,14 +1,17 @@
 {% doc %}
   @param navigation - {string} the nav menu
   @param isMegaMenuActivate - {boolean} check if mega menu is toggle
+  @param background - {string} background color
+  @param color - {string} color text
 
   @description this will render the mega menu
 
-  @example {% render 'megamenu', navigation:navigation, isMegaMenuActivate=false %}
+  @example {% render 'megamenu', navigation:navigation, isMegaMenuActivate=false, background:"", color:"" %}
 {% enddoc %}
 
 <!-- Mega menu -->
 <section
+  style="background-color:{{ background }};color:{{ color }}"
   class="hidden xl:hidden w-full white border-b border-gray-100 megamenu-container transition-all duration-700 ease-in-out fixed left-0 right-0 top-28 z-10"
 >
   <div class="container mx-auto">
