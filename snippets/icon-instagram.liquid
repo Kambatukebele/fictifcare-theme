@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon close
+
+  @example {% render 'icon-instagram', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{%- if stroke != blank -%}{{- stroke -}}{%- else -%}#000{%- endif -%}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <rect x="13.8" y="13.02" width="36.4" height="37.97" rx="10.53" stroke-linecap="round"></rect><circle cx="32" cy="32" r="9.28" stroke-linecap="round"></circle><circle cx="43.11" cy="19.74" r="1.32"></circle>
+</svg>
