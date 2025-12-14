@@ -1,0 +1,171 @@
+<footer
+  style="background-color:{{ section.settings.footer_background_color }}; color:{{ section.settings.footer_text_color }}; padding-top:{{ section.settings.footer_padding_top }}px; padding-bottom:{{ section.settings.footer_padding_bottom }}px"
+  class="w-full"
+>
+  <div class="container mx-auto px-4 xl:px-0 flex flex-col gap-11">
+    <!-- Footer upper -->
+    <div class="w-full flex flex-col gap-6 lg:flex-row">
+      {%- for footer_menu in section.settings.footer_menu.links -%}
+        <!-- Menu card -->
+        <div class="w-full flex flex-col gap-5">
+          <div class="h-9 w-full cursor-pointer flex justify-between items-center footer_menu_heading">
+            <h5 class="text-xl font-semibold ">
+              {{ footer_menu.title }}
+            </h5>
+            <span class="rotate-90 lg:hidden transition-all duration-700 ease-in-out footer_menu_icon">
+              {% render 'icon-chevron-right', stroke: '#000000', size: '20' %}
+            </span>
+          </div>
+          <div class="w-full h-full footer_body_sub_heading hidden lg:block">
+            {%- for footer_subHeading in footer_menu.links -%}
+              <a href="{{ footer_subHeading.url }}" class="block text-base text-[#545454] leading-[150%] h-6 mb-5">
+                {{ footer_subHeading.title }}
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- else -%}
+        <!-- Menu card -->
+        {%- for item in (1..4) -%}
+          <div class="w-full flex flex-col gap-5">
+            <div class="h-9 w-full cursor-pointer flex justify-between items-center footer_menu_heading">
+              <h5 class="text-xl font-semibold ">Help & Support</h5>
+              <span class="rotate-90 lg:hidden transition-all duration-700 ease-in-out footer_menu_icon">
+                {% render 'icon-chevron-right', stroke: '#000000', size: '20' %}
+              </span>
+            </div>
+            <div class="w-full h-full footer_body_sub_heading hidden lg:block">
+              {%- for item in (1..7) -%}
+                <a class="block text-base text-[#545454] leading-[150%] h-6 mb-5">Menu 1</a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+    <!-- Footer icon social media -->
+    <div class="w-full h-14 flex justify-center items-center">
+      {% render 'social-icons', class: 'gap-4', color: '', width: 32 %}
+    </div>
+    <!-- Line -->
+    <div class="h-5">
+      <hr class="border border-[#898989]">
+    </div>
+    <!-- Copyright -->
+    <div class="w-full flex justify-center items-center">
+      <p class="block text-[$545454] text-base">
+        &copy;Copyright {{ 'now' | date: '%Y' }},
+        <span class="uppercase font-normal">{{ shop.name | link_to: shop.url }}</span>
+        <span>All right reserved</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% javascript %}
+  const footerMenuHeading = document.querySelectorAll('.footer_menu_heading');
+  const footerBodySubHeading = document.querySelectorAll('.footer_body_sub_heading');
+  const footerMenuIcon = document.querySelectorAll('.footer_menu_icon');
+
+  footerMenuHeading.forEach((menu_footer, f_index) => {
+    menu_footer.addEventListener('click', () => {
+      if (footerBodySubHeading[f_index].classList.contains('hidden')) {
+        footerBodySubHeading.forEach((subHeading_menu) => subHeading_menu.classList.add('hidden'));
+        footerBodySubHeading[f_index].classList.remove('hidden');
+      } else {
+        footerBodySubHeading[f_index].classList.add('hidden');
+      }
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "footer",
+  "disabled_on": {
+    "groups": ["header"],
+    "templates": ["*"]
+  },
+  "class": "footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer menu"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "header",
+      "content": "Footer settings"
+    },
+    {
+      "type": "color",
+      "id": "footer_background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "paragraph",
+      "content": "Padding top and bottom"
+    },
+    {
+      "type": "range",
+      "id": "footer_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 70,
+      "unit": "px",
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "footer_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 70,
+      "unit": "px",
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Socials",
+      "type": "socials",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "url",
+          "id": "footer_socials",
+          "label": "Socila url"
+        }
+      ]
+    }
+  ],
+  "limit": 1,
+  "presets": [
+    {
+      "name": "Footer",
+      "settings": {
+        "footer_menu": "footer",
+        "footer_background_color": "#ffffff",
+        "footer_text_color": "#000000",
+        "footer_padding_top": 0,
+        "footer_padding_bottom": 0
+      }
+    }
+  ]
+}
+{% endschema %}
