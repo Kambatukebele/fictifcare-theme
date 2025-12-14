@@ -114,7 +114,13 @@
             {% render 'icon-heart', stroke: section.settings.header_text_color, size: '' %}
           </span>
           <span class="cursor-pointer">
-            {% render 'icon-cart', stroke: section.settings.header_text_color, size: '' %}
+            {% render 'icon-cart',
+              stroke: section.settings.header_text_color,
+              size: '',
+              background_count: section.settings.icon_cart_background,
+              number: 0,
+              text_count: section.settings.icon_cart_text_color
+            %}
           </span>
         </div>
       </div>
@@ -348,6 +354,24 @@
       "id": "header_mobile_btn_2_enable",
       "label": "Enable border?",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Icon cart settings"
+    },
+    {
+      "type": "color",
+      "id": "icon_cart_background",
+      "label": "Icon cart background color",
+      "default": "#000000",
+      "info": "This gives the color background to the icon cart"
+    },
+    {
+      "type": "color",
+      "id": "icon_cart_text_color",
+      "label": "Icon cart text color",
+      "default": "#ffffff",
+      "info": "This gives the text color to the icon cart"
     }
   ],
   "blocks": [
