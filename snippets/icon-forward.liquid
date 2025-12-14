@@ -1,0 +1,20 @@
+{% doc %}
+  @param stroke - {string} color stroke
+  @param size - {string} size icon
+
+  @description render icon heart
+
+  @example {% render 'icon-forward', stroke:"", size:"" %}
+{% enddoc %}
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  stroke-width="2.5"
+  stroke="{{ stroke | default: "#000" }}"
+  fill="none"
+  class="duration-300 transform transition-all"
+  style="width: {{- size | default: 24 -}}px; height: {{- size | default: 24 -}}px;"
+>
+  <path d="M55.78 32.63H10.33M38.55 14.63l17.23 18.16-17.23 16.53"></path>
+</svg>
