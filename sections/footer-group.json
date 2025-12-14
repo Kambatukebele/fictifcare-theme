@@ -43,9 +43,21 @@
         "newsletter_button_text_color": "#ffffff",
         "newsletter_icon_button_color": "#ffffff"
       }
+    },
+    "footer_qpRRMV": {
+      "type": "footer",
+      "name": "Footer",
+      "settings": {
+        "footer_menu": "footer",
+        "footer_background_color": "#fafafa",
+        "footer_text_color": "#060606",
+        "footer_padding_top": 40,
+        "footer_padding_bottom": 40
+      }
     }
   },
   "order": [
-    "newsletters_6c4B9P"
+    "newsletters_6c4B9P",
+    "footer_qpRRMV"
   ]
 }
