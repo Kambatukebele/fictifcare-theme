@@ -1,0 +1,54 @@
+{% doc %}
+  Renders all the socials media, by adding a link
+
+  @param color - {string} color of all icons
+  @param width - {string} width of all icons
+  @param class - {string} class to add
+
+  @example {% render 'social-icons', class: class, color: color, width:width %}
+{% enddoc %}
+
+<ul class="flex justify-center items-center {{ class }}">
+  {%- if settings.facebook_url != blank -%}
+    <li>
+      <a href="{{ settings.facebook_url }}">
+        {% render 'icon-facebook', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.instagram_url != blank -%}
+    <li>
+      <a href="{{ settings.instagram_url }}">
+        {% render 'icon-instagram', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.tiktok_url != blank -%}
+    <li>
+      <a href="{{ settings.tiktok_url }}">
+        {% render 'icon-tiktok', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.linkedin_url != blank -%}
+    <li>
+      <a href="{{ settings.linkedin_url }}">
+        {% render 'icon-linkedin', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.snapchat_url != blank -%}
+    <li>
+      <a href="{{ settings.snapchat_url }}">
+        {% render 'icon-snapchat', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.twitter_url != blank -%}
+    <li>
+      <a href="{{ settings.twitter_url }}">
+        {% render 'icon-twitter', stroke: color, size: width %}
+      </a>
+    </li>
+  {%- endif -%}
+</ul>
