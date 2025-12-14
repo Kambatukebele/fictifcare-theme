@@ -8,5 +8,11 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "facebook_url": "#",
+    "instagram_url": "#",
+    "tiktok_url": "#",
+    "snapchat_url": "#",
+    "content_for_index": []
+  }
 }
