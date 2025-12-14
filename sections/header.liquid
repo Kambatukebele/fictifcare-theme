@@ -107,9 +107,14 @@
           <span class="block cursor-pointer">
             {% render 'icon-search', stroke: section.settings.header_text_color, size: '' %}
           </span>
-          <span class="hidden cursor-pointer lg:block">
-            {% render 'icon-user', stroke: section.settings.header_text_color, size: '' %}
-          </span>
+          {%- if shop.customer_accounts_enabled -%}
+            <a
+              href="{%- if customer  -%}}{{ routes.account_url }}{%- else -%}{{ routes.storefront_login_url }}{%- endif -%}"
+              class="hidden cursor-pointer lg:block"
+            >
+              {% render 'icon-user', stroke: section.settings.header_text_color, size: '' %}
+            </a>
+          {%- endif -%}
           <span class="hidden cursor-pointer lg:block">
             {% render 'icon-heart', stroke: section.settings.header_text_color, size: '' %}
           </span>
