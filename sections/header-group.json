@@ -61,7 +61,7 @@
         "header_background_height": "h-12",
         "header_background_color": "#fdfdfd",
         "header_text_color": "#0b0b0b",
-        "enable_header_border": false,
+        "enable_header_border": true,
         "header_menu": "main-menu",
         "header_isMegaMenuActivated": true,
         "header_sub_mega_mobile_menu_bg": "#f2f2f2",
@@ -78,7 +78,9 @@
         "header_mobile_btn_2_text_transform": "uppercase",
         "header_mobile_btn_2_text_color": "#000000",
         "header_mobile_btn_2_url": "",
-        "header_mobile_btn_2_enable": true
+        "header_mobile_btn_2_enable": true,
+        "icon_cart_background": "#000000",
+        "icon_cart_text_color": "#ffffff"
       }
     }
   },
