@@ -1,6 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer group",
-  "sections": {},
-  "order": []
+  "sections": {
+    "newsletters_6c4B9P": {
+      "type": "newsletters",
+      "blocks": {
+        "heading_t9q9Wx": {
+          "type": "heading",
+          "settings": {
+            "newsletters_heading": "Subscribe to our emails"
+          }
+        },
+        "description_64JNg8": {
+          "type": "description",
+          "settings": {
+            "newsletters_description": "<p>Opt in to email and/or SMS to enjoy 15% off your first order* and be the first to know about new FictifCare launches, exclusive offers, and skincare insights.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_t9q9Wx",
+        "description_64JNg8"
+      ],
+      "name": "Newsletters",
+      "settings": {
+        "newsletters_bg": "#fafafa",
+        "newsletters_text_color": "#000000",
+        "newsletters_padding_top": 50,
+        "newsletters_padding_bottom": 50,
+        "newsletter_button_text": "join",
+        "newletters_enable_icon": true,
+        "newsletter_button_bg": "#000000",
+        "newsletter_button_text_color": "#ffffff",
+        "newsletter_icon_button_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "newsletters_6c4B9P"
+  ]
 }
