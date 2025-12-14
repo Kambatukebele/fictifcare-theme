@@ -31,5 +31,68 @@
         "default": "work_sans_n4"
       }
     ]
+  },
+  {
+    "name": "Social icons",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Add your Social media url"
+      },
+      {
+        "type": "paragraph",
+        "content": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "facebook_url",
+        "label": "Facebook"
+      },
+      {
+        "type": "paragraph",
+        "content": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram"
+      },
+      {
+        "type": "paragraph",
+        "content": "Tiktok"
+      },
+      {
+        "type": "url",
+        "id": "tiktok_url",
+        "label": "Tiktok"
+      },
+      {
+        "type": "paragraph",
+        "content": "Linkedin"
+      },
+      {
+        "type": "url",
+        "id": "linkedin_url",
+        "label": "Linkedin"
+      },
+      {
+        "type": "paragraph",
+        "content": "Snapchat"
+      },
+      {
+        "type": "url",
+        "id": "snapchat_url",
+        "label": "Snapchat"
+      },
+      {
+        "type": "paragraph",
+        "content": "Twitter"
+      },
+      {
+        "type": "url",
+        "id": "twitter_url",
+        "label": "Twitter"
+      }
+    ]
   }
 ]
