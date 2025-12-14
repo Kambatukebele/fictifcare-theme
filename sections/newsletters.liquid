@@ -1,0 +1,209 @@
+<section
+  style="background-color: {{ section.settings.newsletters_bg }};color:{{ section.settings.newsletters_text_color }};padding-top:{{ section.settings.newsletters_padding_top }}px;padding-bottom:{{ section.settings.newsletters_padding_bottom }}px"
+  class="w-full my-11"
+>
+  <div class="container mx-auto px-4 xl:px-0">
+    <div class="w-full flex flex-col justify-center items-center gap-5 sm:w-[480px] mx-auto">
+      {%- if section.blocks.size > 0 -%}
+        {% for news in section.blocks %}
+          {%- case news.type -%}
+            {%- when 'heading' -%}
+              <h2 class="text-xl font-semibold leading-[150%] text-center">
+                {{ news.settings.newsletters_heading }}
+              </h2>
+            {%- when 'description' -%}
+              <div class="text-base font-normal text-[#545454] text-center">
+                {{ news.settings.newsletters_description }}
+              </div>
+            {%- else -%}
+          {%- endcase -%}
+        {% endfor %}
+      {%- else -%}
+        <h2 class="text-xl font-semibold leading-[150%] text-center">Subscribe to out emails</h2>
+        <p class="text-base font-normal text-[#545454] text-center">
+          Opt in to email and/or SMS to enjoy 15% off your first order* and be the first to know about new FictifCare
+          launches, exclusive offers, and skincare insights.
+        </p>
+      {%- endif -%}
+      <form class="w-full flex">
+        <input
+          class="h-[60px] border border-[#545454] text-base px-4 w-full"
+          type="email"
+          placeholder="Email"
+          name="email"
+        >
+        <button
+          style="background-color: {{ section.settings.newsletter_button_bg }};color:{{ section.settings.newsletter_button_text_color }}"
+          class="cursor-pointer text-base uppercase w-max h-[60px] flex justify-center items-center gap-3 px-8"
+        >
+          {%- if section.settings.newletters_enable_icon -%}
+            <span class=" w-full block">
+          {%- endif -%}
+          {{ section.settings.newsletter_button_text }}
+          {%- if section.settings.newletters_enable_icon -%}</span>{%- endif -%}
+          {%- if section.settings.newletters_enable_icon -%}
+            <span class="block">
+              {% render 'icon-forward', stroke: section.settings.newsletter_icon_button_color, size: '' %}
+            </span>
+          {%- endif -%}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletters",
+  "class": "newsletters",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletters settings"
+    },
+    {
+      "type": "color",
+      "id": "newsletters_bg",
+      "label": "Background color",
+      "default": "#fff",
+      "info": "Newsletters background color"
+    },
+    {
+      "type": "color",
+      "id": "newsletters_text_color",
+      "label": "Newsletters text color",
+      "default": "#000000"
+    },
+    {
+      "type": "paragraph",
+      "content": "Margins top and bottom"
+    },
+    {
+      "type": "range",
+      "id": "newsletters_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 50,
+      "unit": "px",
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "newsletters_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 50,
+      "unit": "px",
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Forms"
+    },
+    {
+      "type": "paragraph",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_text",
+      "label": "Button text",
+      "placeholder": "Join now",
+      "default": "Follow us"
+    },
+    {
+      "type": "checkbox",
+      "id": "newletters_enable_icon",
+      "label": "Enable button icon",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "newsletter_button_bg",
+      "label": "button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "newsletter_icon_button_color",
+      "label": "Icon button",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.newletters_enable_icon }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading newsletters"
+        },
+        {
+          "type": "text",
+          "id": "newsletters_heading",
+          "label": "Heading",
+          "placeholder": "Subscribe to our emails",
+          "default": "Subscribe here"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Newsletters description"
+        },
+        {
+          "type": "richtext",
+          "id": "newsletters_description",
+          "label": "Description",
+          "default": "<p>Opt in to email and or SMS to enjoy</p>"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header"],
+    "templates": ["*"]
+  },
+  "limit": 1,
+  "tag": "section",
+  "presets": [
+    {
+      "name": "Newsletters",
+      "settings": {
+        "newletters_enable_icon": false,
+        "newsletter_button_bg": "#000000",
+        "newsletter_button_text_color": "#ffffff",
+        "newsletters_bg": "#ffffff",
+        "newsletters_padding_bottom": 0,
+        "newsletters_padding_top": 0,
+        "newsletters_text_color": "#000000",
+        "newsletter_icon_button_color": "#ffffff"
+      },
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
