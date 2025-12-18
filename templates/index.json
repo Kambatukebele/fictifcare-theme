@@ -43,9 +43,27 @@
         "hero_height_desktop": 100,
         "hero_animation_speed": 3
       }
+    },
+    "collection_list_zqCme4": {
+      "type": "collection-list",
+      "name": "Collection list",
+      "settings": {
+        "collection_list_text": "Sustainable Skincare & Beauty Never Tested on Animals",
+        "collection_list_bg": "#ffffff",
+        "collection_list": [
+          "ginger-haircare",
+          "hemp",
+          "shea",
+          "tea-three",
+          "vitamin-e",
+          "white-must"
+        ],
+        "collection_list_text_transform": "normal-case"
+      }
     }
   },
   "order": [
-    "hero_8n9FFT"
+    "hero_8n9FFT",
+    "collection_list_zqCme4"
   ]
 }
