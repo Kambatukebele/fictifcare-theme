@@ -1,0 +1,7 @@
+.scroll-bar {
+  -ms-overflow-style: none; /* Internet explorer 10+ */
+  scrollbar-width: none; /* Firefox, safari, chromium */
+}
+.scroll-bar::-webkit-scrollbar {
+  display: none;
+}
