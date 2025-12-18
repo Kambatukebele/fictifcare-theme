@@ -1,0 +1,358 @@
+<section
+  id="hero-{{ section.id }}"
+  data-animate-speed="{{ section.settings.hero_animation_speed | times: 1000 }}"
+  class="relative w-full h-[70vh] xl:h-[{{ section.settings.hero_height_desktop }}vh] overflow-hidden"
+>
+  {%- if section.blocks.size != 0 -%}
+    {% for slide in section.blocks %}
+      <div class="slide-{{ section.id }} absolute inset-0 w-full h-full" {{ slide.shopify_attributes }}>
+        <div class="relative w-full h-full">
+          {%- case slide.type -%}
+            {%- when 'slider' -%}
+              <div style="background-image: {{ slide.settings.hero_bg }}" class="w-full h-full">
+                {%- if slide.settings.hero_image_mobile != blank -%}
+                  {{-
+                    slide.settings.hero_image_mobile
+                    | image_url: width: 280, height: 661
+                    | image_tag: class: 'w-full h-full object-center object-cover lg:hidden'
+                  -}}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover lg:hidden' }}
+                {%- endif -%}
+
+                {%- if slide.settings.hero_image_desktop != blank -%}
+                  {{-
+                    slide.settings.hero_image_desktop
+                    | image_url: width: 1280, height: 661
+                    | image_tag: class: 'hidden w-full h-full object-center object-cover lg:block'
+                  -}}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'hidden w-full h-full object-center object-cover lg:block' }}
+                {%- endif -%}
+              </div>
+              <div class="w-full px-4 flex flex-col justify-center items-start md:w-2xl gap-4 absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/12 xl:left-1/8 xl:translate-x-0">
+                <h1
+                  style="color:{{ slide.settings.hero_heading_color }}"
+                  class="text-3xl font-semibold md:text-4xl lg:text-5xl xl:text-6xl {{ slide.settings.hero_text_transform }}"
+                >
+                  {{ slide.settings.hero_heading }}
+                </h1>
+                <div
+                  style="color: {{ slide.settings.hero_description_color }}"
+                  class="text-base xl:text-xl font-normal text-left w-full sm:min-w-96"
+                >
+                  {{ slide.settings.hero_description }}
+                </div>
+                <div class="w-full flex flex-wrap gap-2">
+                  <button
+                    style="background-color: {{ slide.settings.button_bg }}; color: {{ slide.settings.button_text_color }}; {% if slide.settings.button_border_is_enable %}border: 1px solid {{ slide.settings.button_border_color }}{% endif %};border-radius: {{ slide.settings.button_border_radius }}px"
+                    class="h-12 px-8 cursor-pointer text-base {{ slide.settings.button_text_transform }}"
+                  >
+                    <a href="{{ slide.settings.button_url }}">
+                      {{ slide.settings.button_text }}
+                    </a>
+                  </button>
+                  {% comment %}
+                    <button class="h-12 px-8 bg-white text-black border cursor-pointer text-base uppercase">
+                      <a href="#">Shop the collection</a>
+                    </button>
+                  {% endcomment %}
+                </div>
+              </div>
+          {%- endcase -%}
+        </div>
+      </div>
+    {% endfor %}
+  {%- else -%}
+    {%- for item in (1..6) -%}
+      <!-- Slide card -->
+      <div class="slide-{{ section.id }} absolute inset-0 w-full h-full transition-all duration-700 ease-in-out">
+        <div class="relative w-full h-full">
+          <div class="w-full h-full">
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover lg:hidden' }}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'hidden w-full h-full object-center object-cover lg:block' }}
+          </div>
+          <div class="w-full px-4 flex flex-col justify-center items-start md:w-2xl gap-4 absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/12 xl:left-1/8 xl:translate-x-0">
+            <h1 class="text-3xl font-semibold md:text-4xl text-black lg:text-5xl xl:text-6xl">
+              Skincare, simplified slide{{ forloop.index0 }}
+            </h1>
+            <p class="text-base xl:text-xl font-normal text-left w-full sm:min-w-96">
+              Discover high-performance formulas made with clean, effective ingredients designed to bring balance,
+              clarity, and calm to every skin type.
+            </p>
+            <div class="w-full flex flex-wrap gap-2">
+              <button class="h-12 px-8 bg-black text-white cursor-pointer text-base uppercase">
+                <a href="#">Shop the collection</a>
+              </button>
+              <button class="h-12 px-8 bg-white text-black border cursor-pointer text-base uppercase">
+                <a href="#">Shop the collection</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide-{{ section.id }}');
+  const sectionId = document.querySelector('#hero-{{ section.id }}');
+  const totalSlides = slides.length;
+  let currentIndex = 0;
+  let annimationSpeed = sectionId.getAttribute('data-animate-speed');
+
+  function showSLider() {
+    //Do not animate when the slide length is equal to 1
+    if (totalSlides === 1) {
+      return;
+    } else {
+      // animage when the slide length is more than 1
+      slides.forEach((slide, index) => {
+        //show default slide on load
+        if (currentIndex === index) {
+          slides[currentIndex].classList.add('translate-x-0');
+        } else {
+          slide.classList.add('translate-x-full');
+        }
+      });
+    }
+  }
+  showSLider();
+
+  function slidePrevAndNext() {
+    const currentSlide = slides[currentIndex];
+    const nextIndex = (currentIndex + 1) % totalSlides;
+    const nextSlide = slides[nextIndex];
+
+    if (nextIndex === 0) {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full');
+        if (index === 0) {
+          slide.classList.add('translate-x-0');
+        } else {
+          slide.classList.add('translate-x-full');
+        }
+        currentIndex = nextIndex;
+      });
+    } else {
+      currentSlide.classList.replace('translate-x-0', '-translate-x-full');
+      nextSlide.classList.replace('translate-x-full', 'translate-x-0');
+      currentIndex++;
+    }
+  }
+
+  setInterval(slidePrevAndNext, annimationSpeed);
+</script>
+
+{% schema %}
+{
+  "name": "Hero",
+  "class": "hero",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "slider",
+      "name": "Slider",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Hero image"
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image_mobile",
+          "label": "Hero image mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image_desktop",
+          "label": "Hero image desktop"
+        },
+        {
+          "type": "color_background",
+          "id": "hero_bg",
+          "label": "Background color"
+        },
+        {
+          "type": "header",
+          "content": "Heading settings"
+        },
+        {
+          "type": "text",
+          "id": "hero_heading",
+          "label": "Heading",
+          "default": "Welcome to our site"
+        },
+        {
+          "type": "color",
+          "id": "hero_heading_color",
+          "label": "Heading color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "hero_text_transform",
+          "label": "Heading Transform",
+          "options": [
+            {
+              "label": "Normal",
+              "value": "normal-case"
+            },
+            {
+              "label": "Uppercase",
+              "value": "uppercase"
+            },
+            {
+              "label": "Capitalize",
+              "value": "capitalize"
+            }
+          ],
+          "default": "normal-case"
+        },
+        {
+          "type": "header",
+          "content": "Description settings"
+        },
+        {
+          "type": "richtext",
+          "id": "hero_description",
+          "label": "Description",
+          "default": "<p>Discover us</p>"
+        },
+        {
+          "type": "color",
+          "id": "hero_description_color",
+          "label": "Description color"
+        },
+        {
+          "type": "header",
+          "content": "Button settings"
+        },
+        {
+          "type": "paragraph",
+          "content": "Button text and URL"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Shop now"
+        },
+        {
+          "type": "radio",
+          "id": "button_text_transform",
+          "label": "Button text transform",
+          "options": [
+            {
+              "label": "Normal",
+              "value": "normal-case"
+            },
+            {
+              "label": "Uppercase",
+              "value": "uppercase"
+            },
+            {
+              "label": "Capitalize",
+              "value": "capitalize"
+            }
+          ],
+          "default": "normal-case"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "paragraph",
+          "content": "Button colors settings"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Button background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_border_is_enable",
+          "label": "Enable button border",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Button border color",
+          "default": "#000000",
+          "visible_if": "{{ section.settings.button_border_is_enable }}"
+        },
+        {
+          "type": "paragraph",
+          "content": "Button border radius"
+        },
+        {
+          "type": "range",
+          "id": "button_border_radius",
+          "min": 0,
+          "max": 100,
+          "unit": "px",
+          "step": 1,
+          "label": "Button border radius",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero setttings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Hero Heights"
+    },
+    {
+      "type": "range",
+      "id": "hero_height_desktop",
+      "min": 60,
+      "max": 100,
+      "unit": "vh",
+      "step": 1,
+      "label": "Hero height desktop",
+      "default": 70
+    },
+    {
+      "type": "paragraph",
+      "content": "Hero Animation"
+    },
+    {
+      "type": "range",
+      "id": "hero_animation_speed",
+      "min": 3,
+      "max": 8,
+      "unit": "s",
+      "step": 1,
+      "label": "Animation speed",
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
