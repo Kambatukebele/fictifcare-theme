@@ -1,0 +1,91 @@
+{{ 'collection_list.css' | asset_url | stylesheet_tag }}
+
+<section class="w-full">
+  <div class="h-[400px] md:h-[500px] flex flex-col justify-center items-center gap-10">
+    <div class="w-full sm:w-[550px]">
+      <h2 class="text-2xl text-center md:text-3xl">
+        {%- if section.settings.collection_list_text -%}
+          {{- section.settings.collection_list_text -}}
+        {%- endif -%}
+      </h2>
+    </div>
+    <div class="w-full scroll-bar overflow-x-scroll flex justify-start items-center gap-2 md:justify-center">
+      {%- for list in section.settings.collection_list -%}
+        <!-- card -->
+        <a href="{{ list.url }}" class="w-[120px] h-[168px] md:w-[182px] md:h-[230px]">
+          <!-- Image -->
+          <div class="w-[120px] h-[120px] md:w-[182px] md:h-[182px] rounded-full flex flex-col gap-4">
+            {{
+              list.featured_image
+              | image_url: width: 180, height: 180
+              | image_tag: class: 'w-full h-full object-center object-cover rounded-full'
+            }}
+          </div>
+          <!-- text -->
+          <div class="mt-2">
+            <p class="text-base text-[#545454] text-center">
+              {{ list.title }}
+            </p>
+          </div>
+        </a>
+      {%- else -%}
+        {%- for item in (1..6) -%}
+          <!-- card -->
+          <div class="w-[120px] h-[168px] md:w-[182px] md:h-[230px]">
+            <!-- Image -->
+            <div class="w-[120px] h-[120px] md:w-[182px] md:h-[182px] rounded-full flex flex-col gap-4">
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+            </div>
+            <!-- text -->
+            <div class="mt-2">
+              <p class="text-base text-[#545454] text-center">Ginger haicare</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "collection_list",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Collection list setttings"
+    },
+    {
+      "type": "text",
+      "id": "collection_list_text",
+      "label": "Collection text",
+      "default": "Substainalble skincase"
+    },
+    {
+      "type": "color",
+      "id": "collection_list_bg",
+      "label": "Collection list bg",
+      "default": "#ffffff"
+    },
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "limit": 6,
+      "label": "Collection list"
+    }
+  ],
+  "tag": "section",
+  "limit": 1,
+  "presets": [
+    {
+      "name": "Collection list",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
