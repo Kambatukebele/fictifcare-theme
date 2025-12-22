@@ -17,13 +17,13 @@
           "type": "slider",
           "settings": {
             "hero_image_mobile": "shopify://shop_images/hero_mobile.png",
-            "hero_image_desktop": "shopify://shop_images/hero_1.png",
+            "hero_image_desktop": "shopify://shop_images/skincare-hero-image-showing-a-girl-care.png",
             "hero_bg": "linear-gradient(54deg, rgba(191, 46, 46, 1) 29%, rgba(13, 13, 13, 1) 100%)",
             "hero_heading": "Skincare, Simplified.",
-            "hero_heading_color": "#ffffff",
+            "hero_heading_color": "#080808",
             "hero_text_transform": "uppercase",
             "hero_description": "<p>Discover high-performance formulas made with clean, effective ingredients designed to bring balance, clarity, and calm to every skin type.</p>",
-            "hero_description_color": "#f6f6f6",
+            "hero_description_color": "#080808",
             "button_text": "shop the collection",
             "button_text_transform": "uppercase",
             "button_url": "",
@@ -51,19 +51,37 @@
         "collection_list_text": "Sustainable Skincare & Beauty Never Tested on Animals",
         "collection_list_bg": "#ffffff",
         "collection_list": [
-          "ginger-haircare",
-          "hemp",
-          "shea",
-          "tea-three",
-          "vitamin-e",
-          "white-must"
+          "acne-treatments",
+          "cleansers",
+          "face-oils",
+          "moisturizers",
+          "serums",
+          "sunscreen"
+        ]
+      }
+    },
+    "featured_product_UagTqx": {
+      "type": "featured-product",
+      "name": "Featured product",
+      "settings": {
+        "featured_product": [
+          "salicylic-acid-toner-for-acne-removing-control-oil-shrink-pores-remove-pimple-exfoliating-moisturizing-brighten-facial-toner",
+          "anti-acn-e-face-serum-moisturizing-salicylic-acid-pimp-le-scar-blackhead-removal-shrink-pores-oil-control-skin-care",
+          "100ml-glycolic-acid-7-toning-solution-to-remove-acne-and-moisturize-skin-rejuvenating-lotion",
+          "aloe-facial-moisturizing-oil-keeps-skin-moist-tender-smooth-deeply-penetrates-improves-skin-texture-skin-care-essence",
+          "bioaqua-centella-asiatica-facial-cleanser-moisturizing-oil-control-face-cleansing-face-wash-foam-facial-cleanser-skin-care",
+          "color-changing-foundation-moisturizer-hydrating-oil-control-color-longwearing-waterproof-travel-coverage-make-up-foundation",
+          "face-essence-essential-oilsvitamin-e-skin-oil-100-nature-face-serum-anti-wrinkle-moisturizing-tight-whitening-skin-care-essence",
+          "face-oil-absorbent-volcanic-roller-portable-reusable-oil-control-on-the-go-instant-results-remove-excess-shine-for-oily-skin"
         ],
-        "collection_list_text_transform": "normal-case"
+        "featured_small_text": "View all",
+        "featured_small_text_url": ""
       }
     }
   },
   "order": [
     "hero_8n9FFT",
-    "collection_list_zqCme4"
+    "collection_list_zqCme4",
+    "featured_product_UagTqx"
   ]
 }
