@@ -1,0 +1,174 @@
+<section class="w-full">
+  <div class="container mx-auto px-4 py-12 flex flex-col gap-8">
+    <div class="flex justify-between items-center">
+      {% content_for 'blocks' %}
+      <div class="flex justify-end items-center gap-4">
+        <div>
+          <a href="{{ section.settings.featured_small_text_url }}" class="text-base text-[#545454]">
+            {{ section.settings.featured_small_text }}
+          </a>
+        </div>
+        <div class="hidden lg:flex justify-end items-center gap-2">
+          <span
+            id="chevron-left-{{ section.id }}"
+            class="w-7 h-7 arrow-left-right border border-[#545454] rounded-full bg-white flex justify-center items-center rotate-180 cursor-pointer"
+          >
+            {% render 'icon-chevron-right', stroke: '#545454', size: '18' %}
+          </span>
+          <span
+            id="chevron-right-{{ section.id }}"
+            class="w-7 h-7 arrow-left-right bg-[#0D0D0D] rounded-full flex justify-center items-center cursor-pointer"
+          >
+            {% render 'icon-chevron-right', stroke: '#ffffff', size: '18' %}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="featured-product-container overflow-x-scroll scroll-bar flex justify-start items-center gap-4">
+      {%- if section.settings.featured_product != blank -%}
+        {%- for product in section.settings.featured_product -%}
+          <!-- card -->
+          <div class="w-[280px]  shrink-0 lg:w-[424px] lg:h-[639px] border border-[#a9a9a95a]">
+            <div class="w-[280px] min-h-[300px] lg:w-[424px] lg:h-[458px]">
+              {%- if product.featured_image != blank -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 1000, height: 1000
+                  | image_tag: class: 'w-full h-full object-center object-cover'
+                }}
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+              {%- endif -%}
+            </div>
+            <div class="p-5 flex flex-col justify-center items-start gap-4">
+              <div class="flex flex-col justify-center items-start">
+                <h4 class="text-xl font-semibold">
+                  {{ product.title }}
+                </h4>
+                {% comment %} <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p> {% endcomment %}
+              </div>
+              {%- if product.variants != blank -%}
+                <div class="flex justify-start items-center gap-1">
+                  {%- for variant in product.variants -%}
+                    {{
+                      variant.featured_image
+                      | image_url: width: 20, height: 20
+                      | image_tag: class: 'block w-5 h-5 rounded-full border border-gray-300 cursor-pointer'
+                    }}
+                    {% comment %} <span class="block w-5 h-5 rounded-full bg-gray-200"></span> {% endcomment %}
+                  {%- endfor -%}
+
+                  {% comment %}
+                    <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                    <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                  {% endcomment %}
+                </div>
+              {%- endif -%}
+
+              <div class="">
+                <span class="text-xl font-semibold">{{ product.price | money }}</span>
+                {% if product.compare_at_price != blank %}
+                  <span class="text-base line-through font-light text-[#545454]">
+                    {{- product.compare_at_price | money -}}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for item in (1..10) -%}
+          <!-- card -->
+          <div class="w-[280px]  shrink-0 lg:w-[424px] lg:h-[639px] border border-[#a9a9a95a]">
+            <div class="w-[280px] min-h-[300px] lg:w-[424px] lg:h-[458px]">
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+            </div>
+            <div class="p-5 flex flex-col justify-center items-start gap-4">
+              <div class="flex flex-col justify-center items-start">
+                <h4 class="text-xl font-semibold">Lash growth serum</h4>
+                <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p>
+              </div>
+              <div class="flex justify-start items-center gap-1">
+                <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+              </div>
+              <div class="">
+                <span class="text-xl font-semibold">$57</span>
+                <span class="text-base line-through font-light text-[#545454]">$57</span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chevronRight = document.querySelector('#chevron-right-{{ section.id }}');
+    const chevronLeft = document.querySelector('#chevron-left-{{ section.id }}');
+    const featuredContainer = document.querySelector('.featured-product-container');
+    let scrollAmount = 424;
+    chevronLeft.addEventListener('click', () => {
+      featuredContainer.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth',
+      });
+    });
+    chevronRight.addEventListener('click', () => {
+      featuredContainer.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth',
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "class": "featured_product",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Featured product settings"
+    },
+    {
+      "type": "product_list",
+      "id": "featured_product",
+      "label": "Featured product",
+      "limit": 12,
+      "info": "The product list"
+    },
+    {
+      "type": "text",
+      "id": "featured_small_text",
+      "label": "Small text",
+      "default": "View all",
+      "placeholder": "Add text here"
+    },
+    {
+      "type": "url",
+      "id": "featured_small_text_url",
+      "label": "Small text url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
