@@ -1,0 +1,23 @@
+<h2 class="text-xl sm:text-xl font-semibold lg:text-3xl">
+  {{ block.settings.H2_heading }}
+</h2>
+
+{% schema %}
+{
+  "name": "H2",
+  "class": "h2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "H2 settings"
+    },
+    {
+      "type": "text",
+      "id": "H2_heading",
+      "label": "H2",
+      "default": "Heading h2",
+      "placeholder": "Add your heading here"
+    }
+  ]
+}
+{% endschema %}
