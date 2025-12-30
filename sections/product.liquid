@@ -1,0 +1,12 @@
+<h1>Product page</h1>
+<div class="w-full px-4 lg:w-1/2">
+  {{
+    product.featured_image
+    | image_url: width: 2048, height: 2048
+    | image_tag: class: 'w-full h-full object-center object-cover block'
+  }}
+</div>
+<div>
+  <h2>{{ product.title }}</h2>
+  <h2>{{ product.price | money }}</h2>
+</div>
