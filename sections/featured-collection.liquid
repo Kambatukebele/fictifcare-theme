@@ -1,0 +1,126 @@
+<section style="background-color: {{ section.settings.featured_collection_bg }}" class="w-full">
+  <div class="container mx-auto px-4 lg:px-0 flex justify-center items-center">
+    <div class="w-full flex   justify-start gap-4 overflow-x-scroll scroll-bar py-12">
+      {%- for featured_collection in section.settings.featured_collection_list -%}
+        <!-- card -->
+        <div class="w-[370px] shrink-0 h-[420px] border border-gray-200 relative">
+          <div class="w-full h-full">
+            {%- if featured_collection.featured_image != blank -%}
+              {{-
+                featured_collection.featured_image
+                | image_url: width: 1000, height: 1000
+                | image_tag: class: 'w-full h-full object-cover object-center block'
+              -}}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover object-center block' }}
+            {%- endif -%}
+          </div>
+
+          <div class="w-72 border absolute bottom-0 left-1/2 -translate-y-1/2 -translate-x-1/2">
+            <a
+              style="background-color:{{ section.settings.card_btn_bg }};color:{{ section.settings.card_btn_text_color }}"
+              href="{{ section.url }}"
+              class="py-4 w-full text-center block text-base px-8 border-none {{ section.settings.card_button_text_transform }}"
+            >
+              {{ featured_collection.title }}
+            </a>
+          </div>
+        </div>
+      {%- else -%}
+        {%- for item in (1..4) -%}
+          <!-- card -->
+          <div class="w-[370px] shrink-0 h-[420px] border border-gray-200 relative">
+            <div class="w-full h-full">
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover object-center block' }}
+            </div>
+
+            <div class="w-72 border absolute bottom-0 left-1/2 -translate-y-1/2 -translate-x-1/2">
+              <a href="#" class="py-4 w-full text-center block px-8 bg-black text-white">Shop the collection</a>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "featured_collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "color",
+      "id": "featured_collection_bg",
+      "label": "Background",
+      "default": "#ffffff",
+      "info": "This is the section background"
+    },
+    {
+      "type": "collection_list",
+      "id": "featured_collection_list",
+      "label": "Select your collection here",
+      "limit": 4,
+      "info": "You must add up to 4 collections"
+    },
+    {
+      "type": "header",
+      "content": "Card settings"
+    },
+
+    {
+      "type": "header",
+      "content": "Button card settings"
+    },
+    {
+      "type": "color",
+      "id": "card_btn_bg",
+      "label": "Button card background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "card_btn_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "radio",
+      "id": "card_button_text_transform",
+      "label": "Card button text transform",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "normal-case"
+        },
+        {
+          "label": "Uppercase",
+          "value": "uppercase"
+        },
+        {
+          "label": "Capitalize",
+          "value": "capitalize"
+        }
+      ],
+      "default": "normal-case"
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "Featured collection",
+      "settings": {
+        "featured_collection_bg": "#ffffff",
+        "featured_collection_list": [],
+        "card_btn_bg": "#000000",
+        "card_btn_text_color": "#ffffff",
+        "card_button_text_transform": "normal-case"
+      }
+    }
+  ]
+}
+{% endschema %}
