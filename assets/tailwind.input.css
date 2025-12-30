@@ -2,6 +2,13 @@
 
 @theme {
   --animate-wiggle: slideUp 1s 0.8s ease-out forwards;
+  .scroll-bar {
+  -ms-overflow-style: none; /* Internet explorer 10+ */
+  scrollbar-width: none; /* Firefox, safari, chromium */
+}
+.scroll-bar::-webkit-scrollbar {
+  display: none;
+}
   @keyframes slideUp {
    '0%': { opacity: 0, transform: 'translateY(20px)' },
     '100%': { opacity: 1, transform: 'translateY(0)' }
