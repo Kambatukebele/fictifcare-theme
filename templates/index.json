@@ -35,7 +35,9 @@
           }
         }
       },
-      "block_order": ["slider_NGNN6K"],
+      "block_order": [
+        "slider_NGNN6K"
+      ],
       "name": "Hero",
       "settings": {
         "hero_height_desktop": 100,
@@ -62,7 +64,7 @@
       "type": "featured-product",
       "blocks": {
         "h2_CjyhFY": {
-          "type": "H2",
+          "type": "h2",
           "name": "H2",
           "settings": {
             "H2_heading": "Featured products"
@@ -70,7 +72,9 @@
           "blocks": {}
         }
       },
-      "block_order": ["h2_CjyhFY"],
+      "block_order": [
+        "h2_CjyhFY"
+      ],
       "name": "Featured product",
       "settings": {
         "featured_product": [
@@ -86,7 +90,28 @@
         "featured_small_text": "View all",
         "featured_small_text_url": ""
       }
+    },
+    "featured_collection_dQiFhW": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "featured_collection_bg": "#ffffff",
+        "featured_collection_list": [
+          "sunscreen",
+          "moisturizers",
+          "face-oils",
+          "cleansers"
+        ],
+        "card_btn_bg": "#000000",
+        "card_btn_text_color": "#ffffff",
+        "card_button_text_transform": "normal-case"
+      }
     }
   },
-  "order": ["hero_8n9FFT", "collection_list_zqCme4", "featured_product_UagTqx"]
+  "order": [
+    "hero_8n9FFT",
+    "collection_list_zqCme4",
+    "featured_product_UagTqx",
+    "featured_collection_dQiFhW"
+  ]
 }
