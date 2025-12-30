@@ -62,6 +62,19 @@
     },
     "featured_product_UagTqx": {
       "type": "featured-product",
+      "blocks": {
+        "h2_CjyhFY": {
+          "type": "H2",
+          "name": "H2",
+          "settings": {
+            "H2_heading": "Featured products"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "h2_CjyhFY"
+      ],
       "name": "Featured product",
       "settings": {
         "featured_product": [
