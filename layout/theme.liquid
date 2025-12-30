@@ -2,6 +2,15 @@
 <html lang="{{ request.locale.iso_code }}">
   <head>
     {% # Inlined CSS Variables %}
+    <style>
+      .scroll-bar {
+        -ms-overflow-style: none; /* Internet explorer 10+ */
+        scrollbar-width: none; /* Firefox, safari, chromium */
+      }
+      .scroll-bar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
     {% render 'css-variables' %}
     <script src="{{ 'header.js' | asset_url }}" defer></script>
     <script src="{{ 'mobile_navigation.js' | asset_url }}" defer></script>
