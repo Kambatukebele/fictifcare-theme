@@ -35,9 +35,7 @@
           }
         }
       },
-      "block_order": [
-        "slider_NGNN6K"
-      ],
+      "block_order": ["slider_NGNN6K"],
       "name": "Hero",
       "settings": {
         "hero_height_desktop": 100,
@@ -72,9 +70,7 @@
           "blocks": {}
         }
       },
-      "block_order": [
-        "h2_CjyhFY"
-      ],
+      "block_order": ["h2_CjyhFY"],
       "name": "Featured product",
       "settings": {
         "featured_product": [
@@ -92,9 +88,5 @@
       }
     }
   },
-  "order": [
-    "hero_8n9FFT",
-    "collection_list_zqCme4",
-    "featured_product_UagTqx"
-  ]
+  "order": ["hero_8n9FFT", "collection_list_zqCme4", "featured_product_UagTqx"]
 }
