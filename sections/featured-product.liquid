@@ -27,54 +27,62 @@
     <div class="featured-product-container overflow-x-scroll scroll-bar flex justify-start items-center gap-4">
       {%- if section.settings.featured_product != blank -%}
         {%- for product in section.settings.featured_product -%}
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
           <!-- card -->
-          <div class="w-[280px]  shrink-0 lg:w-[424px] lg:h-[639px] border border-[#a9a9a95a]">
-            <div class="w-[280px] min-h-[300px] lg:w-[424px] lg:h-[458px]">
-              {%- if product.featured_image != blank -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 1000, height: 1000
-                  | image_tag: class: 'w-full h-full object-center object-cover'
-                }}
-              {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
-              {%- endif -%}
-            </div>
-            <div class="p-5 flex flex-col justify-center items-start gap-4">
-              <div class="flex flex-col justify-center items-start">
-                <h4 class="text-xl font-semibold">
-                  {{ product.title }}
-                </h4>
-                {% comment %} <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p> {% endcomment %}
+          <a href="{{ product.url }}" class="block">
+            <div
+              href="{{ product.url }}"
+              class="w-[280px] flex flex-col shrink-0 lg:w-[424px] lg:max-h-[639px]"
+            >
+              <div class="w-[280px] max-h-[300px] lg:w-[424px] lg:max-h-[458px]">
+                {%- if product.featured_image != blank -%}
+                  {{
+                    product.featured_image
+                    | image_url: width: 1000, height: 1000
+                    | image_tag: class: 'w-full h-full object-center object-cover'
+                  }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+                {%- endif -%}
               </div>
-              {%- if product.variants != blank -%}
-                <div class="flex justify-start items-center gap-1">
-                  {%- for variant in product.variants -%}
-                    {{
-                      variant.featured_image
-                      | image_url: width: 20, height: 20
-                      | image_tag: class: 'block w-5 h-5 rounded-full border border-gray-300 cursor-pointer'
-                    }}
-                    {% comment %} <span class="block w-5 h-5 rounded-full bg-gray-200"></span> {% endcomment %}
-                  {%- endfor -%}
-
-                  {% comment %}
-                    <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
-                    <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
-                  {% endcomment %}
+              <div class="w-[280px] lg:w-[424px] max-h-fit p-5 flex flex-col justify-center items-start gap-4">
+                <div class="w-full flex flex-col justify-center items-start">
+                  <h4 class="text-xl font-semibold">
+                    {{ product.title }}
+                  </h4>
+                  {% comment %} <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p> {% endcomment %}
                 </div>
-              {%- endif -%}
+                {%- if product.variants != blank -%}
+                  <div class="flex justify-start items-center gap-1">
+                    {%- for variant in product.variants -%}
+                      <a href="?variant={{ variant.id }}" class="block">
+                        {{
+                          variant.featured_image
+                          | image_url: width: 20, height: 20
+                          | image_tag: class: 'block w-5 h-5 rounded-full border border-gray-300 cursor-pointer'
+                        }}
+                      </a>
+                      {% comment %} <span class="block w-5 h-5 rounded-full bg-gray-200"></span> {% endcomment %}
+                    {%- endfor -%}
 
-              <div class="">
-                <span class="text-xl font-semibold">{{ product.price | money }}</span>
-                {% if product.compare_at_price != blank %}
-                  <span class="text-base line-through font-light text-[#545454]">
-                    {{- product.compare_at_price | money -}}
-                  </span>
-                {% endif %}
+                    {% comment %}
+                      <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                      <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                    {% endcomment %}
+                  </div>
+                {%- endif -%}
+
+                <div class="">
+                  <span class="text-xl font-semibold">{{ product.price | money }}</span>
+                  {% if product.compare_at_price != blank %}
+                    <span class="text-base line-through font-light text-[#545454]">
+                      {{- product.compare_at_price | money -}}
+                    </span>
+                  {% endif %}
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         {%- endfor -%}
       {%- else -%}
         {%- for item in (1..10) -%}
