@@ -106,12 +106,47 @@
         "card_btn_text_color": "#ffffff",
         "card_button_text_transform": "normal-case"
       }
+    },
+    "text_image_y4Eimk": {
+      "type": "text-image",
+      "blocks": {
+        "text_6y8Din": {
+          "type": "text",
+          "settings": {
+            "text": "Rated Eyelash and Eyebrow Growth Serum",
+            "text_color": "#080808",
+            "description": "<p>Discover FictifCare’s collection of natural beauty essentials, thoughtfully crafted to help you Never Stop Growing. <br/><br/>From our award-winning lash and brow serums to nourishing hair treatments, lip enhancers, and skincare staples, each product is trusted by beauty editors at Vogue, Who What Wear, Glamour, and loved by customers around the world.<br/><br/>At FictifCare, we believe you deserve to look and feel your best at every age and every stage. That’s why we offer curated sets, exclusive offers, and our VIP Growth Club — giving you early access, savings, and expert guidance, including tailored support for those navigating menopause or post-treatment hair recovery.<br/><br/>Enhance your natural beauty with products that truly deliver — and a community that inspires you to Never Stop Growing.</p>",
+            "description_color": "",
+            "button_text": "Lean more",
+            "button_bg": "#f2ff00",
+            "button_text_color": "#101010",
+            "button_text_transform": "uppercase"
+          }
+        },
+        "image_LPgQTp": {
+          "type": "image",
+          "settings": {
+            "image_block": "shopify://shop_images/generate-an-image-wih-a-woman-holding-an-acne-traitement-product-for-skincare.png"
+          }
+        }
+      },
+      "block_order": [
+        "text_6y8Din",
+        "image_LPgQTp"
+      ],
+      "name": "Text image",
+      "settings": {
+        "text_image_bg": "#ffffff",
+        "text_image_padding_top": 50,
+        "text_image_padding_bottom": 50
+      }
     }
   },
   "order": [
     "hero_8n9FFT",
     "collection_list_zqCme4",
     "featured_product_UagTqx",
-    "featured_collection_dQiFhW"
+    "featured_collection_dQiFhW",
+    "text_image_y4Eimk"
   ]
 }
