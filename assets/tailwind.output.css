@@ -37,7 +37,6 @@
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-semibold: 600;
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -224,12 +223,6 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-  .top-1 {
-    top: calc(var(--spacing) * 1);
-  }
-  .top-1\/2 {
-    top: calc(1/2 * 100%);
-  }
   .top-14 {
     top: calc(var(--spacing) * 14);
   }
@@ -241,18 +234,6 @@
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
-  }
-  .bottom-1 {
-    bottom: calc(var(--spacing) * 1);
-  }
-  .bottom-1\/2 {
-    bottom: calc(1/2 * 100%);
-  }
-  .bottom-2 {
-    bottom: calc(var(--spacing) * 2);
-  }
-  .bottom-10 {
-    bottom: calc(var(--spacing) * 10);
   }
   .-left-\[1200px\] {
     left: calc(1200px * -1);
@@ -374,12 +355,6 @@
   .h-\[168px\] {
     height: 168px;
   }
-  .h-\[280px\] {
-    height: 280px;
-  }
-  .h-\[380px\] {
-    height: 380px;
-  }
   .h-\[400px\] {
     height: 400px;
   }
@@ -425,9 +400,6 @@
   .w-7 {
     width: calc(var(--spacing) * 7);
   }
-  .w-44 {
-    width: calc(var(--spacing) * 44);
-  }
   .w-52 {
     width: calc(var(--spacing) * 52);
   }
@@ -440,29 +412,14 @@
   .w-\[120px\] {
     width: 120px;
   }
+  .w-\[164px\] {
+    width: 164px;
+  }
   .w-\[280px\] {
     width: 280px;
   }
-  .w-\[320px\] {
-    width: 320px;
-  }
-  .w-\[330px\] {
-    width: 330px;
-  }
-  .w-\[340px\] {
-    width: 340px;
-  }
-  .w-\[350px\] {
-    width: 350px;
-  }
-  .w-\[360px\] {
-    width: 360px;
-  }
   .w-\[370px\] {
     width: 370px;
-  }
-  .w-\[380px\] {
-    width: 380px;
   }
   .w-fit {
     width: fit-content;
@@ -473,13 +430,7 @@
   .w-max {
     width: max-content;
   }
-  .max-w-fit {
-    max-width: fit-content;
-  }
   .flex-shrink {
-    flex-shrink: 1;
-  }
-  .shrink {
     flex-shrink: 1;
   }
   .shrink-0 {
@@ -506,14 +457,6 @@
   }
   .translate-x-0 {
     --tw-translate-x: calc(var(--spacing) * 0);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-1 {
-    --tw-translate-x: calc(var(--spacing) * 1);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-1\/2 {
-    --tw-translate-x: calc(1/2 * 100%);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .translate-x-full {
@@ -696,6 +639,9 @@
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
+  .px-\[32px\] {
+    padding-inline: 32px;
+  }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
@@ -825,10 +771,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-  .ease-out {
-    --tw-ease: var(--ease-out);
-    transition-timing-function: var(--ease-out);
-  }
   .sm\:w-\[480px\] {
     @media (width >= 40rem) {
       width: 480px;
@@ -875,6 +817,11 @@
       width: 182px;
     }
   }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
   .md\:justify-center {
     @media (width >= 48rem) {
       justify-content: center;
@@ -907,11 +854,6 @@
       display: none;
     }
   }
-  .lg\:h-\[400px\] {
-    @media (width >= 64rem) {
-      height: 400px;
-    }
-  }
   .lg\:h-\[458px\] {
     @media (width >= 64rem) {
       height: 458px;
@@ -937,14 +879,14 @@
       width: calc(1/2 * 100%);
     }
   }
-  .lg\:w-\[400px\] {
-    @media (width >= 64rem) {
-      width: 400px;
-    }
-  }
   .lg\:w-\[424px\] {
     @media (width >= 64rem) {
       width: 424px;
+    }
+  }
+  .lg\:w-\[600px\] {
+    @media (width >= 64rem) {
+      width: 600px;
     }
   }
   .lg\:flex-row {
@@ -1005,24 +947,6 @@
     @media (width >= 80rem) {
       font-size: var(--text-xl);
       line-height: var(--tw-leading, var(--text-xl--line-height));
-    }
-  }
-}
-.scroll-bar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scroll-bar::-webkit-scrollbar {
-  display: none;
-}
-, @theme {
-  --animate-wiggle: slideUp 1s 0.8s ease-out forwards;
-  @keyframes slideUp {
-    '0%': {
-      opacity: 0, transform: 'translateY(20px)';
-    }
-    , '100%': {
-      opacity: 1, transform: 'translateY(0)';
     }
   }
 }

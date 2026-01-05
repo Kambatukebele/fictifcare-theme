@@ -1,0 +1,240 @@
+<section
+  style="background-color:{{ section.settings.text_image_bg }};padding-top:{{ section.settings.text_image_padding_top }}px;padding-bottom:{{ section.settings.text_image_padding_bottom }}px"
+  class="w-full"
+>
+  <div class="container mx-auto px-4 lg:px-0">
+    <div class="w-full flex flex-col gap-8 lg:flex-row">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'text' -%}
+            <!-- text -->
+            <div class="w-full flex flex-col gap-6 lg:w-1/2">
+              <div class="w-full flex flex-col gap-2">
+                <h2 style="color:{{ block.settings.text_color }}" class="text-xl font-semibold">
+                  {{ block.settings.text }}
+                </h2>
+                <div style="color:{{ block.settings.description_color }}" class="text-base">
+                  {{ block.settings.description }}
+                </div>
+              </div>
+              <a
+                href="{{ block.settings.button_url }}"
+                style="background-color:{{ block.settings.button_bg }};color:{{ block.settings.button_text_color }}"
+                class="w-[164px] flex justify-center items-center h-[60px] px-8 {{ block.settings.button_text_transform }}"
+              >
+                {{ block.settings.button_text }}
+              </a>
+            </div>
+          {%- when 'image' -%}
+            <!-- image -->
+            <div class="w-full lg:w-1/2 flex justify-center items-center">
+              <div class="w-full ">
+                {%- if block.settings.image_block != blank -%}
+                  {{
+                    block.settings.image_block
+                    | image_url: width: 1000, height: 1000
+                    | image_tag: class: 'w-full h-full object-center object-cover block'
+                  }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover block' }}
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- else -%}
+        <!-- text -->
+        <div class="w-full flex flex-col gap-6 lg:w-1/2">
+          <div class="w-full flex flex-col gap-2">
+            <h2 class="text-xl font-semibold">Rated Eyelash and Eyebrow Growth Serum</h2>
+            <p class="text-base">
+              Discover FictifCare’s collection of natural beauty essentials, thoughtfully crafted to help you Never Stop
+              Growing.
+              <br>
+              From our award-winning lash and brow serums to nourishing hair treatments, lip enhancers, and skincare
+              staples, each product is trusted by beauty editors at Vogue, Who What Wear, Glamour, and loved by
+              customers around the world.
+              <br>
+              <br>
+              At FictifCare, we believe you deserve to look and feel your best at every age and every stage. That’s why
+              we offer curated sets, exclusive offers, and our VIP Growth Club — giving you early access, savings, and
+              expert guidance, including tailored support for those navigating menopause or post-treatment hair
+              recovery.
+              <br>
+              <br>
+              Enhance your natural beauty with products that truly deliver — and a community that inspires you to Never
+              Stop Growing.
+            </p>
+          </div>
+          <a
+            href=""
+            class="w-[164px] flex justify-center items-center h-[60px] px-8 uppercase bg-black text-white"
+            >Learn more</a
+          >
+        </div>
+        <!-- image -->
+        <div class="w-full border lg:w-1/2 flex justify-center items-center">
+          <div class="w-full lg:w-[600px]">
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover block' }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text image",
+  "class": "text_image",
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Heading settings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Title",
+          "placeholder": "Enter text here",
+          "default": "Heading here"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Description settings"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "color",
+          "id": "description_color",
+          "label": "Description color"
+        },
+        {
+          "type": "header",
+          "content": "Button settings"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Text",
+          "placeholder": "Shop now",
+          "default": "Shop now"
+        },
+        {
+          "type": "color",
+          "id": "button_bg",
+          "label": "Button background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "radio",
+          "id": "button_text_transform",
+          "label": "Button text transform",
+          "options": [
+            {
+              "label": "Uppercase",
+              "value": "uppercase"
+            },
+            {
+              "label": "Normal",
+              "value": "normal-case"
+            },
+            {
+              "label": "Capitalize",
+              "value": "capitalize"
+            }
+          ],
+          "default": "uppercase"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        }
+      ]
+    },
+    {
+      "name": "Image",
+      "type": "image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_block",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "color",
+      "id": "text_image_bg",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "text_image_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "text_image_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "presets": [
+    {
+      "name": "Text image",
+      "settings": {
+        "text_image_bg": "#ffffff",
+        "text_image_padding_top": 0,
+        "text_image_padding_bottom": 0
+      }
+    }
+  ]
+}
+{% endschema %}
