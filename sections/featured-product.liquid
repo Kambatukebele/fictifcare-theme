@@ -26,23 +26,81 @@
     </div>
     <div class="featured-product-container overflow-x-scroll scroll-bar flex justify-start items-center gap-4">
       {%- if section.settings.featured_product != blank -%}
+        {% comment %}
+          {%- for product in section.settings.featured_product -%}
+            <!-- card -->
+            <a href="{{ product.url }}" class="block">
+              <div
+                class="w-[280px] flex flex-col shrink-0 lg:w-[424px] lg:max-h-[639px]"
+              >
+                <div class="w-[280px] max-h-[300px] lg:w-[424px] lg:max-h-[458px]">
+                  {%- if product.featured_image != blank -%}
+                    {{
+                      product.featured_image
+                      | image_url: width: 1000, height: 1000
+                      | image_tag: class: 'w-full h-full object-center object-cover'
+                    }}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+                  {%- endif -%}
+                </div>
+                <div class="w-[280px] lg:w-[424px] max-h-fit p-5 flex flex-col justify-center items-start gap-4">
+                  <div class="w-full flex flex-col justify-center items-start">
+                    <h4 class="text-xl font-semibold">
+                      {{ product.title }}
+                    </h4>
+                    {% comment %} <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p> {% endcomment %}
+                  </div>
+                  {%- if product.has_only_default_variant == false -%}
+                    <div class="flex justify-start items-center gap-1">
+                      {%- for variant in product.variants -%}
+                        {%- if variant.featured_image -%}
+                          <a href="?variant={{ variant.id }}" class="block">
+                            {{
+                              variant.featured_image
+                              | image_url: width: 20, height: 20
+                              | image_tag: class: 'block w-5 h-5 rounded-full border border-gray-300 cursor-pointer'
+                            }}
+                          </a>
+                        {%- endif -%}
+
+                        {% comment %} <span class="block w-5 h-5 rounded-full bg-gray-200"></span> {% endcomment %}
+                      {%- endfor -%}
+
+                      {% comment %}
+                        <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                        <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
+                      {% endcomment %}
+                    </div>
+                  {%- endif -%}
+
+                  <div class="">
+                    <span class="text-xl font-semibold">{{ product.price | money }}</span>
+                    {% if product.compare_at_price != blank %}
+                      <span class="text-base line-through font-light text-[#545454]">
+                        {{- product.compare_at_price | money -}}
+                      </span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </a>
+          {%- endfor -%}
+        {% endcomment %}
         {%- for product in section.settings.featured_product -%}
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
           <!-- card -->
-          <a href="{{ product.url }}" class="block">
-            <div
-              href="{{ product.url }}"
-              class="w-[280px] flex flex-col shrink-0 lg:w-[424px] lg:max-h-[639px]"
-            >
+          <div class="product-card block" data-product-id="{{ product.id }}">
+            <div class="w-[280px] flex flex-col shrink-0 lg:w-[424px] lg:max-h-[639px]">
               <div class="w-[280px] max-h-[300px] lg:w-[424px] lg:max-h-[458px]">
                 {%- if product.featured_image != blank -%}
-                  {{
-                    product.featured_image
-                    | image_url: width: 1000, height: 1000
-                    | image_tag: class: 'w-full h-full object-center object-cover'
-                  }}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 1000, height: 1000 }}"
+                    alt="{{ product.title }}"
+                    class="product-image w-full h-full object-center object-cover"
+                    data-default-src="{{ product.featured_image | image_url: width: 1000, height: 1000 }}"
+                  >
                 {% else %}
-                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-center object-cover' }}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-image w-full h-full object-center object-cover' }}
                 {%- endif -%}
               </div>
               <div class="w-[280px] lg:w-[424px] max-h-fit p-5 flex flex-col justify-center items-start gap-4">
@@ -50,39 +108,56 @@
                   <h4 class="text-xl font-semibold">
                     {{ product.title }}
                   </h4>
-                  {% comment %} <p class="text-base text-[#545454]">For ultimatum lot length and gaster growth</p> {% endcomment %}
+                  <p class="variant-title text-sm text-gray-600 mt-1"></p>
                 </div>
-                {%- if product.variants != blank -%}
+                {%- if product.variants.size > 1 -%}
                   <div class="flex justify-start items-center gap-1">
                     {%- for variant in product.variants -%}
-                      <a href="?variant={{ variant.id }}" class="block">
-                        {{
-                          variant.featured_image
-                          | image_url: width: 20, height: 20
-                          | image_tag: class: 'block w-5 h-5 rounded-full border border-gray-300 cursor-pointer'
-                        }}
-                      </a>
-                      {% comment %} <span class="block w-5 h-5 rounded-full bg-gray-200"></span> {% endcomment %}
+                      <button
+                        type="button"
+                        class="variant-swatch block"
+                        data-variant-id="{{ variant.id }}"
+                        data-variant-image="{% if variant.featured_image %}{{ variant.featured_image | image_url: width: 1000, height: 1000 }}{% endif %}"
+                        data-variant-price="{{ variant.price | money }}"
+                        data-variant-compare-price="{% if variant.compare_at_price %}{{ variant.compare_at_price | money }}{% endif %}"
+                        data-variant-title="{{ variant.title }}"
+                        data-variant-available="{{ variant.available }}"
+                        data-variant-url="{{ product.url }}?variant={{ variant.id }}"
+                      >
+                        {%- if variant.featured_image -%}
+                          <img
+                            src="{{ variant.featured_image | image_url: width: 40, height: 40 }}"
+                            alt="{{ variant.title }}"
+                            class="block w-5 h-5 rounded-full border border-gray-300 cursor-pointer object-cover hover:border-black transition"
+                          >
+                        {%- else -%}
+                          <span
+                            class="block w-5 h-5 rounded-full border border-gray-300 cursor-pointer bg-gray-200 hover:border-black transition"
+                          ></span>
+                        {%- endif -%}
+                      </button>
                     {%- endfor -%}
-
-                    {% comment %}
-                      <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
-                      <span class="block w-5 h-5 rounded-full bg-gray-200"></span>
-                    {% endcomment %}
                   </div>
                 {%- endif -%}
 
-                <div class="">
-                  <span class="text-xl font-semibold">{{ product.price | money }}</span>
+                <div class="product-pricing">
+                  <span class="product-price text-xl font-semibold">{{ product.price | money }}</span>
                   {% if product.compare_at_price != blank %}
-                    <span class="text-base line-through font-light text-[#545454]">
-                      {{- product.compare_at_price | money -}}
+                    <span class="product-compare-price text-base line-through font-light text-[#545454]">
+                      {{ product.compare_at_price | money }}
                     </span>
                   {% endif %}
                 </div>
+
+                <a
+                  href="{{ product.url }}"
+                  class="product-link inline-block bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+                >
+                  View Product
+                </a>
               </div>
             </div>
-          </a>
+          </div>
         {%- endfor -%}
       {%- else -%}
         {%- for item in (1..10) -%}
@@ -129,6 +204,81 @@
       featuredContainer.scrollBy({
         left: scrollAmount,
         behavior: 'smooth',
+      });
+    });
+    // Variants
+    const productCards = document.querySelectorAll('.product-card');
+
+    productCards.forEach((card) => {
+      const variantSwatches = card.querySelectorAll('.variant-swatch');
+      const productImage = card.querySelector('.product-image');
+      const productPrice = card.querySelector('.product-price');
+      const productComparePrice = card.querySelector('.product-compare-price');
+      const variantTitle = card.querySelector('.variant-title');
+      const productLink = card.querySelector('.product-link');
+
+      variantSwatches.forEach((swatch) => {
+        swatch.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Remove active state from all swatches
+          variantSwatches.forEach((s) => {
+            s.querySelector('img, span').classList.remove('border-black');
+            s.querySelector('img, span').classList.add('border-gray-300');
+          });
+
+          // Add active state to clicked swatch
+          const swatchElement = this.querySelector('img, span');
+          swatchElement.classList.remove('border-gray-300');
+          swatchElement.classList.add('border-black');
+
+          // Get variant data
+          const variantImage = this.dataset.variantImage;
+          const variantPrice = this.dataset.variantPrice;
+          const variantComparePrice = this.dataset.variantComparePrice;
+          const variantTitleText = this.dataset.variantTitle;
+          const variantUrl = this.dataset.variantUrl;
+          const variantAvailable = this.dataset.variantAvailable === 'true';
+
+          // Update image
+          if (variantImage && productImage) {
+            productImage.src = variantImage;
+          }
+
+          // Update price
+          if (productPrice) {
+            productPrice.textContent = variantPrice;
+          }
+
+          // Update compare at price
+          if (productComparePrice) {
+            if (variantComparePrice) {
+              productComparePrice.textContent = variantComparePrice;
+              productComparePrice.style.display = 'inline';
+            } else {
+              productComparePrice.style.display = 'none';
+            }
+          }
+
+          // Update variant title
+          if (variantTitle) {
+            variantTitle.textContent = variantTitleText;
+          }
+
+          // Update link
+          if (productLink) {
+            productLink.href = variantUrl;
+          }
+
+          // Optional: Update availability
+          if (!variantAvailable && productLink) {
+            productLink.textContent = 'Out of Stock';
+            productLink.classList.add('opacity-50', 'cursor-not-allowed');
+          } else if (productLink) {
+            productLink.textContent = 'View Product';
+            productLink.classList.remove('opacity-50', 'cursor-not-allowed');
+          }
+        });
       });
     });
   });
